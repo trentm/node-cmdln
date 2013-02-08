@@ -9,7 +9,6 @@ function Conan(options) {
     Cmdln.call(this, options);
 }
 util.inherits(Conan, Cmdln);
-//Conan.prototype.name = 'conan';
 Conan.prototype.description = 'What is best in life?';
 
 
@@ -49,7 +48,7 @@ function main(argv) {
     cli.main(argv, function (err) {
         if (err) {
             console.error('conan: error: %s', err);
-            process.exit(err.exitStatus || 1);
+            process.exit(1);
         }
         process.exit(0);
     });

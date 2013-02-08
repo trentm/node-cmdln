@@ -6,6 +6,7 @@
     Conan.do_hear.description = "Hear the lamentation of their women."
 - !nopt
 - mainline convenience export
+- show --version top-level handling
 - docs
 - ship it
 - test with imgadm

@@ -8,23 +8,56 @@ for updates to node-cmdln.
 
 # Usage
 
-"conan.js":
+You define a subclass of `Cmdln` and subcommands as `do_NAME` methods.
+Minimally you could have a "conan.js" as follows:
 
     #!/usr/bin/env node
     var util = require('util');
-    var cmdln = require('cmdln');
+    var Cmdln = require('cmdln').Cmdln;
 
-    function Conan() {
-        this.name = 'foo';
+    function Conan(options) {
+        Cmdln.call(this, options);
     }
-    util.inherits(Conan, cmdln.Cmdln);
+    util.inherits(Conan, Cmdln);
+    Conan.prototype.description = 'What is best in life?';
 
-    Conan.prototype.do_hello = function do_hello(self, subcmd, opts):
-        """${cmd_name}: Conan greets thee"""
-        print "Ugh!"
+    Conan.prototype.do_crush = function do_crush(subcmd, opts, args, callback) {
+        console.log('Yargh!');
+        callback();
+    };
+    Conan.prototype.do_crush.description = 'Crush your enemies.';
 
+    // mainline
+    var cli = new Conan();
+    cli.main(process.argv, function (err) {
+        if (err) {
+            console.error('conan: error: %s', err);
+            process.exit(1);
+        }
+        process.exit(0);
+    });
 
+With this, you get the following behaviour:
 
+    $ node conan.js
+    What is best in life?
 
+    Usage:
+        conan [<options>] <command> [<args>...]
+        conan help <command>
 
-    XXX
+    Options:
+        -h, --help          Show this help message and exit.
+
+    Commands:
+        help (?)            Give detailed help on a specific sub-command.
+        crush               Crush your enemies.
+
+    $ node conan.js help crush
+    Crush your enemies.
+
+    $ node conan.js crush
+    Yargh!
+
+Not much yet. Option processing and help output templating to come. See
+"examples/conan.js" for a larger example.
