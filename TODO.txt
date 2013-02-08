@@ -1,0 +1,16 @@
+- init/postoptparsing hook
+- help output templating:
+    Conan.description = "What is best in life?"
+    Conan.do_crush.description = "To crush your enemies."
+    Conan.do_see.description = "See them driven before you."
+    Conan.do_hear.description = "Hear the lamentation of their women."
+- !nopt
+- mainline convenience export
+- docs
+- ship it
+- test with imgadm
+- bash completion generation support
+
+# someday/maybe
+
+- interactive shell (a la cmdln.py)
