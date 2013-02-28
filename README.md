@@ -27,7 +27,7 @@ Minimally you could have a "conan.js" as follows:
         console.log('Yargh!');
         callback();
     };
-    Conan.prototype.do_crush.description = 'Crush your enemies.';
+    Conan.prototype.do_crush.help = 'Crush your enemies.';
 
     // mainline
     var cli = new Conan();
@@ -45,15 +45,15 @@ With this, you get the following behaviour:
     What is best in life?
 
     Usage:
-        conan [<options>] <command> [<args>...]
-        conan help <command>
+        conan [OPTIONS] COMMAND [ARGS...]
+        conan help COMMAND
 
     Options:
-        -h, --help          Show this help message and exit.
+        -h, --help      Show this help message and exit.
 
     Commands:
-        help (?)            Give detailed help on a specific sub-command.
-        crush               Crush your enemies.
+        help (?)        Help on a specific sub-command.
+        crush           Crush your enemies.
 
     $ node conan.js help crush
     Crush your enemies.
@@ -61,5 +61,77 @@ With this, you get the following behaviour:
     $ node conan.js crush
     Yargh!
 
-Not much yet. Option processing and help output templating to come. See
-"examples/conan.js" for a larger example.
+
+See "examples/conan.js" for a larger example, including option processing
+and help templating. `node example/conan.js ...` to try it out.
+
+
+# Option processing
+
+Option processing (using [dashdash](https://github.com/trentm/node-dashdash))
+is integrated. `do_crush` above could be replaced with:
+
+    Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
+        console.log('Yargh!');
+        callback();
+    };
+    Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
+        if (opts.help) {
+            this.do_help('help', {}, [subcmd], callback);
+            return;
+        }
+        if (!args.length) {
+            console.log('No enemies? Yarg!');
+        } else {
+            args.forEach(function (enemy) {
+                console.log('Smite %s with a %s!', enemy, opts.weapon);
+            });
+        }
+        callback();
+    };
+    Conan.prototype.do_crush.options = [
+        {
+            names: ['help', 'h'],
+            type: 'bool',
+            help: 'Show this help.'
+        },
+        {
+            names: ['weapon', 'w'],
+            helpArg: 'WEAPON',
+            type: 'string',
+            default: 'sword',
+            help: 'Weapon with which to smite.'
+        }
+    ];
+    Conan.prototype.do_crush.help = (
+        'Crush your enemies.\n'
+        + '\n'
+        + 'Usage:\n'
+        + '     conan crush [OPTIONS] [ENEMIES...]\n'
+        + '\n'
+        + '{{options}}'
+    );
+
+Then we get this behaviour:
+
+    $ node conan.js crush Bob
+    Smite Bob with a sword!
+
+    $ node conan.js crush Bob Linda --weapon mattock
+    Smite Bob with a mattock!
+    Smite Linda with a mattock!
+
+    $ node conan.js crush -h
+    Crush your enemies.
+
+    Usage:
+         conan crush [OPTIONS] [ENEMIES...]
+
+    Options:
+        -h, --help                  Show this help.
+        -w WEAPON, --weapon=WEAPON  Weapon with which to smite.
+
+
+# License
+
+MIT. See LICENSE.txt

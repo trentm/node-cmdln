@@ -2,7 +2,6 @@
  * A `conan` CLI.
  */
 
-var p = console.log;
 var util = require('util');
 var Cmdln = require('../lib/cmdln').Cmdln;
 
@@ -15,22 +14,16 @@ function Conan() {
 util.inherits(Conan, Cmdln);
 
 
-var crushActionFromWeapon = {
-    sword: 'Slash',
-    spear: 'Pierce',
-    maul: 'Crush'
-};
 Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
     if (opts.help) {
-        self.do_help(subcmd, opts, args, callback);
+        this.do_help('help', {}, [subcmd], callback);
         return;
     }
     if (!args.length) {
         console.log('No enemies? Yarg!');
     } else {
-        var action = crushActionFromWeapon[opts.weapon] || 'Punch';
         args.forEach(function (enemy) {
-            console.log('%s %s!', action, enemy);
+            console.log('Smite %s with a %s!', enemy, opts.weapon);
         });
     }
     callback();
@@ -45,8 +38,8 @@ Conan.prototype.do_crush.options = [
         names: ['weapon', 'w'],
         helpArg: 'WEAPON',
         type: 'string',
-        help: 'Weapon with which to crush. One of: '
-            + Object.keys(crushActionFromWeapon).join(', ')
+        default: 'sword',
+        help: 'Weapon with which to smite.'
     }
 ];
 Conan.prototype.do_crush.help = (
