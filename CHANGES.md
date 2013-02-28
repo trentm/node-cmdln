@@ -1,5 +1,5 @@
 # node-cmdln Changelog
 
-## 1.0.0 (not yet released)
+## 1.0.0
 
 First release.
