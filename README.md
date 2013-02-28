@@ -15,11 +15,13 @@ Minimally you could have a "conan.js" as follows:
     var util = require('util');
     var Cmdln = require('cmdln').Cmdln;
 
-    function Conan(options) {
-        Cmdln.call(this, options);
+    function Conan() {
+        Cmdln.call(this, {
+            name: 'conan',
+            desc: 'What is best in life?'
+        });
     }
     util.inherits(Conan, Cmdln);
-    Conan.prototype.description = 'What is best in life?';
 
     Conan.prototype.do_crush = function do_crush(subcmd, opts, args, callback) {
         console.log('Yargh!');

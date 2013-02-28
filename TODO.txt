@@ -1,17 +1,15 @@
-- init/postoptparsing hook
-- help output templating:
-    Conan.description = "What is best in life?"
-    Conan.do_crush.description = "To crush your enemies."
-    Conan.do_see.description = "See them driven before you."
-    Conan.do_hear.description = "Hear the lamentation of their women."
-- !nopt
+- test suite
+- drop help_* support, no need
+- update README for current usage
+- init/postoptparsing hook: test with top-level '--version' option
+- make do_help and -h|--help optional (see helpOpt, helpCmd in ctor)
 - mainline convenience export
 - show --version top-level handling
 - docs
 - ship it
-- test with imgadm
-- bash completion generation support
+- test with imgadm, imgapi-cli
 
 # someday/maybe
 
+- bash completion generation support
 - interactive shell (a la cmdln.py)
