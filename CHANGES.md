@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.0.1 (not yet released)
+## 1.0.1
 
 - Fix for a subcmd calling `do_help` on itself.
 
