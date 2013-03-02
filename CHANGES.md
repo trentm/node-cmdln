@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 1.0.3 (not yet released)
+
+(nothing yet)
+
+
 ## 1.0.2
 
 - Update to [dashdash
