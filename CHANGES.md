@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.0.2 (not yet released)
+## 1.0.2
 
 - Update to [dashdash
   1.0.2](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#102).
