@@ -62,10 +62,6 @@ With this, you get the following behaviour:
     Yargh!
 
 
-See "examples/conan.js" for a larger example, including option processing
-and help templating. `node example/conan.js ...` to try it out.
-
-
 # Option processing
 
 Option processing (using [dashdash](https://github.com/trentm/node-dashdash))
@@ -130,6 +126,10 @@ Then we get this behaviour:
     Options:
         -h, --help                  Show this help.
         -w WEAPON, --weapon=WEAPON  Weapon with which to smite.
+
+
+See "examples/conan.js" for the complete example. Run
+`node example/conan.js ...` to try it out.
 
 
 # License

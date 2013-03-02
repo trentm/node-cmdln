@@ -1,4 +1,3 @@
-- test suite
 - init/postoptparsing hook: test with top-level '--version' option
 - drop help_* support, no need
 - update README for current usage
