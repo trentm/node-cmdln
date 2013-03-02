@@ -14,8 +14,7 @@ distclean:
 
 .PHONY: test
 test: | $(NODEUNIT)
-	#$(NODEUNIT) test/*.test.js
-	@echo "No tests :("
+	$(NODEUNIT) test/*.test.js
 
 .PHONY: testall
 testall: test09 test08

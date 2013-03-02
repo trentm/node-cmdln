@@ -2,7 +2,10 @@
 
 ## 1.0.2 (not yet released)
 
-(nothing yet)
+- Update to [dashdash
+  1.0.2](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#102).
+
+- Start a test suite.
 
 
 ## 1.0.1

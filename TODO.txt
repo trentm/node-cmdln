@@ -1,11 +1,9 @@
 - test suite
+- init/postoptparsing hook: test with top-level '--version' option
 - drop help_* support, no need
 - update README for current usage
-- init/postoptparsing hook: test with top-level '--version' option
 - make do_help and -h|--help optional (see helpOpt, helpCmd in ctor)
 - mainline convenience export
-- show --version top-level handling
-- docs
 - ship it
 - test with imgadm, imgapi-cli
 
