@@ -13,15 +13,15 @@ Minimally you could have a "conan.js" as follows:
 
     #!/usr/bin/env node
     var util = require('util');
-    var Cmdln = require('cmdln').Cmdln;
+    var cmdln = require('cmdln');
 
     function Conan() {
-        Cmdln.call(this, {
+        cmdln.Cmdln.call(this, {
             name: 'conan',
             desc: 'What is best in life?'
         });
     }
-    util.inherits(Conan, Cmdln);
+    util.inherits(Conan, cmdln.Cmdln);
 
     Conan.prototype.do_crush = function do_crush(subcmd, opts, args, callback) {
         console.log('Yargh!');
@@ -29,15 +29,7 @@ Minimally you could have a "conan.js" as follows:
     };
     Conan.prototype.do_crush.help = 'Crush your enemies.';
 
-    // mainline
-    var cli = new Conan();
-    cli.main(process.argv, function (err) {
-        if (err) {
-            console.error('conan: error: %s', err);
-            process.exit(1);
-        }
-        process.exit(0);
-    });
+    cmdln.main(Conan);  // mainline
 
 With this, you get the following behaviour:
 

@@ -36,16 +36,16 @@ before(function (next) {
 test('exports', function (t) {
     t.ok(cmdln.Cmdln, 'cmdln.Cmdln');
     t.ok(cmdln.CmdlnError, 'cmdln.CmdlnError');
-    t.ok(cmdln.IllegalOptionError, 'cmdln.IllegalOptionError');
+    t.ok(cmdln.OptionError, 'cmdln.OptionError');
     t.ok(cmdln.UnknownCommandError, 'cmdln.UnknownCommandError');
+    t.ok(cmdln.main, 'cmdln.main');
     t.end();
 });
 
 test('<error>.code', function (t) {
-    ['IllegalOption', 'UnknownCommand'].forEach(function (name) {
-        var e = new cmdln[name + 'Error']('msg');
-        t.equal(e.code, name);
-    });
+    var cause = new Error('boom')
+    t.equal((new cmdln.OptionError(cause)).code, 'Option');
+    t.equal((new cmdln.UnknownCommandError('foo')).code, 'UnknownCommand');
     t.end();
 });
 

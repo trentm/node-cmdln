@@ -1,6 +1,19 @@
 # node-cmdln Changelog
 
-## 1.0.3 (not yet released)
+## 1.1.0 (not yet released)
+
+- Add `cmdln.main` for simpler mainline usage, e.g.:
+
+        function MyTool() {
+            // ...
+        }
+        util.inherits(MyTool, cmdln.Cmdln);
+
+        // ...
+
+        if (require.main === module) {
+            cmdln.main(MyTool);
+        }
 
 - Drop support for 'help_FOO' help commands. Not worth the complexity.
 

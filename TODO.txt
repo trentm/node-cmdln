@@ -1,4 +1,3 @@
-- drop help_* support, no need
 - Want subcommand in the error here:
     $ c see -h asdf
     conan: error: Error: unknown option: "-h"
