@@ -2,6 +2,8 @@
 
 ## 1.0.3 (not yet released)
 
+- Drop support for 'help_FOO' help commands. Not worth the complexity.
+
 - Allow custom options given in constructor and a `Cmdln.prototype.init`
   hook that is called to handle the top-level options after they are
   parsed out and before subcmd dispatch. See "examples/conan.js" for
