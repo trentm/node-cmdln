@@ -2,7 +2,12 @@
 
 ## 1.0.3 (not yet released)
 
-(nothing yet)
+- Allow custom options given in constructor and a `Cmdln.prototype.init`
+  hook that is called to handle the top-level options after they are
+  parsed out and before subcmd dispatch. See "examples/conan.js" for
+  an example.
+
+- Top-level options are put on `this.opts` for use by subcmds.
 
 
 ## 1.0.2

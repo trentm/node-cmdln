@@ -87,6 +87,14 @@ var cases = [
         }
     },
 
+    // Custom option and init to handle it.
+    {
+        cmd: 'conan.js --version',
+        expect: {
+            stdout: /^conan \d+/
+        }
+    },
+
     // subcmd
     {
         cmd: 'conan.js crush',
@@ -136,6 +144,47 @@ var cases = [
         }
     },
 
+    // subcmd option processing, no options
+    {
+        cmd: 'conan.js see -h',
+        expect: {
+            stderr: /unknown option: "-h"/,
+            code: 1
+        }
+    },
+    {
+        cmd: 'conan.js see -- -h',
+        expect: {
+            stdout: /I see -h./
+        }
+    },
+
+    // global opts on `this.opts`
+    {
+        cmd: 'conan.js crush Bob',
+        expect: {
+            stdout: /Smite Bob with a sword!/
+        }
+    },
+    {
+        cmd: 'conan.js -x crush Bob',
+        expect: {
+            stdout: /Smite Bob with a sword! Yarg!/
+        }
+    },
+    {
+        cmd: 'conan.js see Bob',
+        expect: {
+            stdout: /I see Bob./
+        }
+    },
+    {
+        cmd: 'conan.js -x see Bob',
+        expect: {
+            stdout: /I see Bob. Yarg!/
+        }
+    },
+
 
 ];
 
@@ -143,6 +192,11 @@ cases.forEach(function (c, i) {
     var expect = c.expect;
     var cmd = c.cmd;
     var name = format('case %d: %s', i, c.cmd);
+    if (process.env.TEST_FILTER && name.indexOf(process.env.TEST_FILTER) === -1) {
+        debug('skip test "%s": does not match TEST_FILTER "%s"',
+            name, process.env.TEST_FILTER);
+        return;
+    }
     test(name, function (t) {
         debug('--');
         var opts = {
@@ -151,6 +205,7 @@ cases.forEach(function (c, i) {
         var realCmd = cmd.replace(/conan.js/, 'node examples/conan.js');
         exec(realCmd, opts, function (err, stdout, stderr) {
             debug('err:', err);
+            debug('code:', err && err.code);
             debug('stdout: "%s"', stdout);
             debug('stderr: "%s"', stderr);
             if (expect.err) {
@@ -160,7 +215,13 @@ cases.forEach(function (c, i) {
                         format('err.message does not match %s: "%s"',
                             expect.err, err.message));
                 }
-            } else {
+            }
+            if (expect.code !== undefined) {
+                var code = err ? err.code : 0;
+                t.equal(code, expect.code, format(
+                    'exit code does not match %s: %s', expect.code, code));
+            }
+            if (!(expect.err || expect.code !== undefined)) {
                 t.ifError(err);
             }
             if (expect.stdout) {

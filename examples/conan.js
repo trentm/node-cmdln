@@ -2,16 +2,36 @@
  * A `conan` CLI.
  */
 
+var p = console.log;
 var util = require('util');
 var Cmdln = require('../lib/cmdln').Cmdln;
+
+var VERSION = '1.0.0';
 
 function Conan() {
     Cmdln.call(this, {
         name: 'conan',
-        desc: 'What is best in life?'
+        desc: 'What is best in life?',
+        // Custom options. By default you get -h/--help.
+        options: [
+            {names: ['help', 'h'], type: 'bool', help: 'Print help and exit.'},
+            {name: 'version', type: 'bool', help: 'Print version and exit.'},
+            {name: 'x', type: 'bool', help: 'Be more excited about it.'}
+        ]
     });
 }
 util.inherits(Conan, Cmdln);
+
+// Custom `init` to handle custom options (i.e. 'version' defined above).
+Conan.prototype.init = function (opts, args, callback) {
+    if (opts.version) {
+        p(this.name, VERSION);
+        callback(false);
+        return;
+    }
+    // Cmdln class handles `opts.help`.
+    Cmdln.prototype.init.apply(this, arguments);
+};
 
 
 Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
@@ -19,11 +39,13 @@ Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
         this.do_help('help', {}, [subcmd], callback);
         return;
     }
+    // `this.opts` holds the global options. Here we use '-x'.
+    var x = (this.opts.x ? ' Yarg!' : '');
     if (!args.length) {
-        console.log('No enemies? Yarg!');
+        console.log('No enemies?%s', x);
     } else {
         args.forEach(function (enemy) {
-            console.log('Smite %s with a %s!', enemy, opts.weapon);
+            console.log('Smite %s with a %s!%s', enemy, opts.weapon, x);
         });
     }
     callback();
@@ -53,11 +75,22 @@ Conan.prototype.do_crush.help = (
 
 
 Conan.prototype.do_see = function (subcmd, opts, args, callback) {
+    var x = (this.opts.x ? ' Yarg!' : '');
+    if (args.length) {
+        args.forEach(function (arg) {
+            console.log('I see %s.%s', arg, x);
+        })
+    } else {
+        console.log('I see nothing.%s', x);
+    }
     callback();
 };
 Conan.prototype.do_see.help = 'See them driven before you.'
+// Explicitly empty opts to do option processing.
+Conan.prototype.do_see.options = [];
 
 Conan.prototype.do_hear = function (subcmd, opts, args, callback) {
+    console.log('I hear %s.', args.join(' '));
     callback();
 };
 Conan.prototype.do_hear.help = 'Hear the lamentation of their women.'
