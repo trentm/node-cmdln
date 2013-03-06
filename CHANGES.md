@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 1.1.1 (not yet released)
+
+(nothing yet)
+
+
 ## 1.1.0
 
 - Add `cmdln.main` for simpler mainline usage, e.g.:
