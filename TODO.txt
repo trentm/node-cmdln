@@ -1,16 +1,9 @@
-- Want subcommand in the error here:
-    $ c see -h asdf
-    conan: error: Error: unknown option: "-h"
-  Perhaps:
-    conan see: error: unknown option: "-h"
 - doc `init` usage (--version example). Doc `this.opts` for global parsed
   opts.
 - update README for current usage
-- make do_help and -h|--help optional (see helpOpt, helpCmd in ctor)
-- mainline convenience export
+- make do_help optional (see helpCmd in ctor)
 - `debug: true` option to  ctor for the debug logging
 - ship it
-- envopts back? cleanly? If cleanly via user-side, that's be cool.
 - test with imgadm, imgapi-cli
 
 # someday/maybe

@@ -2,7 +2,9 @@
 
 ## 1.1.1 (not yet released)
 
-(nothing yet)
+- Update to [dashdash
+  1.2.0](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#120):
+  envvar integration, '--dry-run' -> `opts.dry_run`.
 
 
 ## 1.1.0
