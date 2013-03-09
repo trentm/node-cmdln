@@ -1,6 +1,6 @@
 {
     "name": "cmdln",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "helper lib for creating CLI tools with subcommands; think `git`, `svn`, `zfs`",
     "author": "Trent Mick (http://trentm.com)",
     "main": "./lib/cmdln.js",
