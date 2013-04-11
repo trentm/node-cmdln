@@ -60,10 +60,6 @@ Option processing (using [dashdash](https://github.com/trentm/node-dashdash))
 is integrated. `do_crush` above could be replaced with:
 
     Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
-        console.log('Yargh!');
-        callback();
-    };
-    Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
         if (opts.help) {
             this.do_help('help', {}, [subcmd], callback);
             return;
