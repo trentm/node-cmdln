@@ -76,7 +76,7 @@ Conan.prototype.do_crush.help = (
 
 
 Conan.prototype.do_see = function (subcmd, opts, args, callback) {
-    var x = (this.opts.x ? ' Yarg!' : '');
+    var x = (this.opts.x || opts.x ? ' Yarg!' : '');
     if (args.length) {
         args.forEach(function (arg) {
             console.log('I see %s.%s', arg, x);
@@ -86,15 +86,25 @@ Conan.prototype.do_see = function (subcmd, opts, args, callback) {
     }
     callback();
 };
-Conan.prototype.do_see.help = 'See them driven before you.'
-// Explicitly empty opts to do option processing.
-Conan.prototype.do_see.options = [];
+Conan.prototype.do_see.help = (
+    'See them driven before you.\n'
+    + '\n'
+    + 'Usage:\n'
+    + '     conan see [OPTIONS] [ENEMIES...]\n'
+    + '\n'
+    + '{{options}}'
+);
+Conan.prototype.do_see.options = [
+    {name: 'x', type: 'bool', help: 'Be more excited about it.'}
+];
 
 Conan.prototype.do_hear = function (subcmd, opts, args, callback) {
     console.log('I hear %s.', args.join(' '));
     callback();
 };
 Conan.prototype.do_hear.help = 'Hear the lamentation of their women.'
+// Explicitly empty opts to do option processing.
+Conan.prototype.do_hear.options = [];
 
 
 if (require.main === module) {
