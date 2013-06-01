@@ -2,7 +2,9 @@
 
 ## 1.1.2 (not yet released)
 
-(nothing yet)
+- Update to [dashdash
+  1.3.0](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#130):
+  interp boolean envvar '0' as false
 
 
 ## 1.1.1
