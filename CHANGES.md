@@ -2,7 +2,10 @@
 
 ## 1.1.4 (not yet released)
 
-(nothing yet)
+- Update to [dashdash
+  1.3.2](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#132):
+  fix a subtlety with an option using all of `type: 'bool'`, `default` and
+  `env` (IOW, rare).
 
 
 ## 1.1.3
