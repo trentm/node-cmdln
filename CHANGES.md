@@ -2,7 +2,9 @@
 
 ## 1.1.3 (not yet released)
 
-(nothing yet)
+- Update to [dashdash
+  1.3.1](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#131):
+  fix 'env' not working for options with a 'default'.
 
 
 ## 1.1.2
