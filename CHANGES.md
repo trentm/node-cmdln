@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.2.0 (not yet released)
+## 1.2.0
 
 - [Backward incompatible change] Underscores in sub-command `do_*` methods
   are translated to hyphens for the sub-command name. This means you can
