@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 1.2.1 (not yet released)
+
+(nothing yet)
+
+
 ## 1.2.0
 
 - [Backward incompatible change] Underscores in sub-command `do_*` methods
