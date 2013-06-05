@@ -1,8 +1,18 @@
 # node-cmdln Changelog
 
-## 1.1.5 (not yet released)
+## 1.2.0 (not yet released)
 
-(nothing yet)
+- [Backward incompatible change] Underscores in sub-command `do_*` methods
+  are translated to hyphens for the sub-command name. This means you can
+  have sub-commands with hyphens, at the cost of not allowing underscores.
+
+  A sub-command method like this:
+
+        MyCmdln.prototype.do_foo_bar
+
+  results in a 'foo-bar' sub-command.
+
+  Shout if this breaks you. I could see about making this configurable.
 
 
 ## 1.1.4
