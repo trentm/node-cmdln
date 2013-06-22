@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 1.2.2 (not yet released)
+
+(nothing yet)
+
+
 ## 1.2.1
 
 - Pass the `subcmd` back as the second arg in the `<cli>.main` callback. This
