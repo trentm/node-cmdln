@@ -2,7 +2,29 @@
 
 ## 1.2.1 (not yet released)
 
-(nothing yet)
+- Pass the `subcmd` back as the second arg in the `<cli>.main` callback. This
+  enabled the subcmd to be quoted in an error message if there was an `err`
+  returned. E.g.:
+
+        var cli = new Mo();
+        cli.main(process.argv, function (err, subcmd) {
+            if (err) {
+                var subcmdStr = subcmd ? ' ' + subcmd : '';    // <---- HERE
+                if (err.body && err.body.code) {
+                    console.error('%s%s: error (%s): %s', cli.name, subcmdStr,
+                        err.body.code, err.message);
+                } else {
+                    console.error('%s%s: error: %s', cli.name, subcmdStr,
+                        err.message);
+                }
+                if (cli.opts.verbose && err.stack) {
+                    console.error('\n' + err.stack);
+                }
+                process.exit(1);
+            } else {
+                process.exit(0);
+            }
+        });
 
 
 ## 1.2.0
