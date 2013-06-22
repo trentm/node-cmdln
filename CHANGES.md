@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.2.1 (not yet released)
+## 1.2.1
 
 - Pass the `subcmd` back as the second arg in the `<cli>.main` callback. This
   enabled the subcmd to be quoted in an error message if there was an `err`
