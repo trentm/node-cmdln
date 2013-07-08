@@ -2,7 +2,9 @@
 
 ## 1.2.2 (not yet released)
 
-(nothing yet)
+- Fix `{{name}}`-replacement in subcmd help templates: all {{name}} usages
+  are replaced. Change from using the *subcommand* name as the value of
+  `{{name}}` to the *tool name* (i.e. the top-level command name).
 
 
 ## 1.2.1

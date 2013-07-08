@@ -91,7 +91,7 @@ is integrated. `do_crush` above could be replaced with:
         'Crush your enemies.\n'
         + '\n'
         + 'Usage:\n'
-        + '     conan crush [OPTIONS] [ENEMIES...]\n'
+        + '     {{name}} crush [OPTIONS] [ENEMIES...]\n'
         + '\n'
         + '{{options}}'
     );

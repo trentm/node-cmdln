@@ -69,7 +69,7 @@ Conan.prototype.do_crush.help = (
     'Crush your enemies.\n'
     + '\n'
     + 'Usage:\n'
-    + '     conan crush [OPTIONS] [ENEMIES...]\n'
+    + '     {{name}} crush [OPTIONS] [ENEMIES...]\n'
     + '\n'
     + '{{options}}'
 );
@@ -90,7 +90,7 @@ Conan.prototype.do_see.help = (
     'See them driven before you.\n'
     + '\n'
     + 'Usage:\n'
-    + '     conan see [OPTIONS] [ENEMIES...]\n'
+    + '     {{name}} see [OPTIONS] [ENEMIES...]\n'
     + '\n'
     + '{{options}}'
 );
