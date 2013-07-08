@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 1.2.3 (not yet released)
+
+(nothing yet)
+
+
 ## 1.2.2
 
 - Fix `{{name}}`-replacement in subcmd help templates: all {{name}} usages
