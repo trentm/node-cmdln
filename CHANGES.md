@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.3.0 (not yet released)
+## 1.3.0
 
 - Add a `Cmdln.emptyLine` hook that is called when no argv is given, i.e.
   when your command is called with no args:
