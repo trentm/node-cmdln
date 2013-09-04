@@ -1,8 +1,28 @@
 # node-cmdln Changelog
 
-## 1.2.3 (not yet released)
+## 1.3.0 (not yet released)
 
-(nothing yet)
+- Add a `Cmdln.emptyLine` hook that is called when no argv is given, i.e.
+  when your command is called with no args:
+
+        $ mycmd
+
+  The default behaviour (as before) is to print help output.
+  A **change in default behaviour** is that this will now exit non-zero. If
+  you want different behaviour, then override `emptyLine()` in your Cmdln
+  subclass.
+
+- Improve the `cmdln.main` convenience function's printing of error messages.
+  An `options.showCode` has been added to allow printing error instances'
+  `code` attribute, if defined. E.g., with this usage:
+
+        cmdln.main(MyCmd, process.argv, {showCode: true});
+
+  You get this output for errors (in this example the error is an unknown
+  subcommand):
+
+        $ node mycmd.js bogus
+        mycmd bogus: error (UnknownCommand): unknown command: "bogus"
 
 
 ## 1.2.2
