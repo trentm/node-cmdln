@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 1.3.2 (not yet released)
+
+(nothing yet)
+
+
 ## 1.3.1
 
 - Add `helpBody` optional param to `Cmdln` constructor. This is string content
