@@ -2,7 +2,8 @@
 
 ## 1.3.1 (not yet released)
 
-(nothing yet)
+- Add `helpBody` optional param to `Cmdln` constructor. This is string content
+  that will be included at the help of automatic help output.
 
 
 ## 1.3.0
