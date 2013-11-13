@@ -2,7 +2,8 @@
 
 ## 1.3.2 (not yet released)
 
-(nothing yet)
+- Don't `process.exit(0)` in `cmdln.main` for success to allow open listeners
+  to continue.
 
 
 ## 1.3.1

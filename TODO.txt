@@ -1,3 +1,4 @@
+- <Cmdln>.fini parallel to .init  to finalize whatever
 - doc helpOpts, helpBody, etc.
 - tests and docs for _ -> - translation in sub-command names
 - doc `init` usage (--version example). Doc `this.opts` for global parsed
