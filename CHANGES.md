@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.3.2 (not yet released)
+## 1.3.2
 
 - Add `<Cmdln>.handlerFromSubcmd(<subcmd>)` hook. For example this could allow
   a user's Cmdln subclass to lookup attributes on the handler functions
