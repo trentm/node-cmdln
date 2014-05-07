@@ -2,6 +2,10 @@
 
 ## 1.3.2 (not yet released)
 
+- Add `<Cmdln>.handlerFromSubcmd(<subcmd>)` hook. For example this could allow
+  a user's Cmdln subclass to lookup attributes on the handler functions
+  during `<Cmdln>.init()`.
+
 - Don't `process.exit(0)` in `cmdln.main` for success to allow open listeners
   to continue.
 

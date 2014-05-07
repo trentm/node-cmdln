@@ -120,6 +120,19 @@ See "examples/conan.js" for the complete example. Run
 `node example/conan.js ...` to try it out.
 
 
+# Cmdln API
+
+To use this module you create an object that inherits from `cmdln.Cmdln`. There
+are a number of relevant methods on `Cmdln` to can be used.
+
+(TODO: finish documenting these. For now the examples and cmdln.js code are
+the best resources.)
+
+- `<Cmdln>.handlerFromSubcmd(<subcmd>)` will return the appropriate
+  `do_<subcmd>` method that handles the given sub-command. This resolves
+  sub-command aliases.
+
+
 # License
 
 MIT. See LICENSE.txt
