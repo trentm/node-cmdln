@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 1.3.3 (not yet released)
+## 1.3.3
 
 - Update to dashdash@1.6.0 (and other deps).
 
