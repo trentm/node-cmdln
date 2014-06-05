@@ -2,7 +2,7 @@
 
 ## 1.3.3 (not yet released)
 
-(nothing yet)
+- Update to dashdash@1.6.0 (and other deps).
 
 
 ## 1.3.2

@@ -13,12 +13,12 @@
     "keywords": ["cmdln", "cli", "tool"],
 
     "dependencies": {
-        "assert-plus": "0.1.3",
-        "extsprintf": "1.0.2",
-        "verror": "1.3.6",
-        "dashdash": "1.3.2"
+        "assert-plus": "0.1.5",
+        "extsprintf": "1.0.3",
+        "verror": "1.4.0",
+        "dashdash": "1.6.0"
     },
     "devDependencies": {
-        "nodeunit": "0.7.4"
+        "nodeunit": "0.9.0"
     }
 }

@@ -55,7 +55,8 @@ var cases = [
         cmd: 'conan.js',
         expect: {
             stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /hear/]
+                /^Commands/m, /crush/, /hear/],
+            code: 1
         }
     },
     {
