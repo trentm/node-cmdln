@@ -2,7 +2,7 @@
 
 ## 1.3.4 (not yet released)
 
-(nothing yet)
+- Reduce the npm package size (drop tests, examples, build tools, etc.)
 
 
 ## 1.3.3
