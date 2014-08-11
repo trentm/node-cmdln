@@ -33,6 +33,9 @@
         var cli = new CLI();
         cmdln.main(cli, {argv: argv, ...other options...});  # new
 
+- Add `<Cmdln>.fini(...)` hook method run after a subcommand handler -- to
+  complement `<Cmdln>.init(...)`.
+
 - Reduce the npm package size (drop tests, examples, build tools, etc.)
 
 

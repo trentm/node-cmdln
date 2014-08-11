@@ -320,6 +320,21 @@ var cases = [
             ]
         }
     },
+
+    // Test .init() and .fini()
+    {
+        cmd: 'init-fini.js',
+        expect: {
+            code: 1,
+            stdout: [/ran init/, /ran fini: undefined/]
+        }
+    },
+    {
+        cmd: 'init-fini.js hi',
+        expect: {
+            stdout: 'ran init\nhi\nran fini: hi'
+        }
+    },
 ];
 
 cases.forEach(function (c, i) {

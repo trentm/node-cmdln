@@ -10,11 +10,7 @@ var cmdln = require('../../lib/cmdln');
 function CLI() {
     cmdln.Cmdln.call(this, {
         name: 'bwcompat-main-v1',
-        desc: 'Test out old v1 cmdln.main().',
-        options: [
-            {name: 'verbose', type: 'bool',
-                help: 'See this.showErrStack=true to test that.'},
-        ]
+        desc: 'Test out old v1 cmdln.main().'
     });
 }
 util.inherits(CLI, cmdln.Cmdln);

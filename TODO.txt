@@ -1,10 +1,4 @@
-# cmdln.main() improvements for 2.0
-
-- Also do `fini` hook:
-  Cmdln.fini = function fini(err, subcmd) { ... };
-
-
-# other 2.0? 2.1?
+# 2.1?
 
 - bash completion generation support
 - docs: see below
@@ -12,7 +6,6 @@
 
 # other
 
-- <Cmdln>.fini parallel to .init  to finalize whatever
 - doc helpOpts, helpBody, etc.
 - tests and docs for _ -> - translation in sub-command names
 - doc `init` usage (--version example). Doc `this.opts` for global parsed

@@ -138,8 +138,17 @@ documented here.
 To use this module you create an object that inherits from `cmdln.Cmdln`. There
 are a number of relevant methods and fields on `Cmdln` that can be used.
 
+- `new <Cmdln>(config)` Create a Cmdln subclass instance. See the block comment
+  in the code for docs.
+
 - `<Cmdln>.do_<subcmd>(subcmd, opts, args, callback)` is how a subcommand is
   defined. See the
+
+- `<Cmdln>.init(opts, args, callback)` Hook run after option processing
+  (`this.opts` is set), but before the subcommand handler is run.
+
+- `<Cmdln>.fini(subcmd, callback)` Hook run after the subcommand handler is
+  run.
 
 - `<Cmdln>.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
   print a full stack on a shown error.
