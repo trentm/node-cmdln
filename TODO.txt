@@ -1,7 +1,21 @@
 # 2.1?
 
+- support for sub-subcommands
 - bash completion generation support
 - docs: see below
+
+
+# bash completion
+
+Some thoughts. See `npm completion` for some inspiration.
+
+- Having dashdash option types of 'path', 'file', 'dir' that were basically just
+  completion type annotations on regular 'str' might be helpful.
+- Need/want type annotations on the args. Then node-manta would want to provide
+  special completion handling for "mantaPath" type.
+- Ultimately want a fallback to custom control via a `Cmdln.do_foo.completion`.
+- dashdash itself should provide option completion to support bash completion
+  simple commands
 
 
 # other
