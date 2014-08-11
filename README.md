@@ -29,11 +29,11 @@ Minimally you could have a "conan.js" as follows:
     };
     Conan.prototype.do_crush.help = 'Crush your enemies.';
 
-    cmdln.main(Conan);  // mainline
+    cmdln.main(new Conan());  // mainline
 
 With this, you get the following behaviour:
 
-    $ node conan.js
+    $ node examples/conan.js
     What is best in life?
 
     Usage:
@@ -47,10 +47,10 @@ With this, you get the following behaviour:
         help (?)        Help on a specific sub-command.
         crush           Crush your enemies.
 
-    $ node conan.js help crush
+    $ node examples/conan.js help crush
     Crush your enemies.
 
-    $ node conan.js crush
+    $ node examples/conan.js crush
     Yargh!
 
 
@@ -98,14 +98,14 @@ is integrated. `do_crush` above could be replaced with:
 
 Then we get this behaviour:
 
-    $ node conan.js crush Bob
+    $ node examples/conan.js crush Bob
     Smite Bob with a sword!
 
-    $ node conan.js crush Bob Linda --weapon mattock
+    $ node examples/conan.js crush Bob Linda --weapon mattock
     Smite Bob with a mattock!
     Smite Linda with a mattock!
 
-    $ node conan.js crush -h
+    $ node examples/conan.js crush -h
     Crush your enemies.
 
     Usage:
@@ -120,17 +120,33 @@ See "examples/conan.js" for the complete example. Run
 `node example/conan.js ...` to try it out.
 
 
-# Cmdln API
+# Reference
+
+In general, please read the comments in the source. The API is far from fully
+documented here.
+
+## `cmdln.Cmdln`
 
 To use this module you create an object that inherits from `cmdln.Cmdln`. There
-are a number of relevant methods on `Cmdln` to can be used.
+are a number of relevant methods and fields on `Cmdln` that can be used.
 
-(TODO: finish documenting these. For now the examples and cmdln.js code are
-the best resources.)
+- `<Cmdln>.do_<subcmd>(subcmd, opts, args, callback)` is how a subcommand is
+  defined. See the
+
+- `<Cmdln>.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
+  print a full stack on a shown error.
 
 - `<Cmdln>.handlerFromSubcmd(<subcmd>)` will return the appropriate
   `do_<subcmd>` method that handles the given sub-command. This resolves
   sub-command aliases.
+
+
+## `cmdln.main()`
+
+This is a convenience method for driving the mainline of your script using
+the your defined `Cmdln` subclass. There are a number of options to control
+how it works. Read the block comment on that function in "lib/cmdln.js" for
+the best docs.
 
 
 # License

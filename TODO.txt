@@ -1,3 +1,17 @@
+# cmdln.main() improvements for 2.0
+
+- Also do `fini` hook:
+  Cmdln.fini = function fini(err, subcmd) { ... };
+
+
+# other 2.0? 2.1?
+
+- bash completion generation support
+- docs: see below
+
+
+# other
+
 - <Cmdln>.fini parallel to .init  to finalize whatever
 - doc helpOpts, helpBody, etc.
 - tests and docs for _ -> - translation in sub-command names
@@ -7,7 +21,6 @@
 - update README for current usage
 - make do_help optional (see helpCmd in ctor)
 - `debug: true` option to  ctor for the debug logging
-- ship it
 - test with imgadm, imgapi-cli
 
 # someday/maybe

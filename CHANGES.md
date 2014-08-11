@@ -1,6 +1,37 @@
 # node-cmdln Changelog
 
-## 1.3.4 (not yet released)
+## 2.0.0 (not yet released)
+
+- Improvements to the `cmdln.main()` function:
+
+    - The call signature has changed to take a Cmdln subclass *instance*
+      rather than the constructor function. This allows one to initialize
+      it with parameters if necessary. The new signature is:
+
+            function main(<cli-instance>, <options>)
+
+    - Added the `options.showErrStack` option to force the printing of the full
+      error stack for a shown exit error. Instead, `<cli>.showErrStack` can
+      be set true to show the full stack on error. One can use the latter
+      to control error stack printing in the `<cli>.init()` method, e.g. from
+      a --verbose option or an envvar (see [this test
+      command](./test/cmd/main-opts.js#L24) for an example).
+
+    - The default handling of `NoCommandError`, i.e. calling the CLI with no
+      subcommand, has changed to **not** show an error string (a la `git`,
+      `brew` and others). The new `options.showNoCommandErr` option was added.
+      Set it to true to get the old behaviour.
+
+  Note on backward compatibility: If the old call signature is used, then
+  `cmdln.main()` will function as before. However, please upgrade to the
+  new form. From this:
+
+        cmdln.main(CLI, argv, options);  # old
+
+  to this:
+
+        var cli = new CLI();
+        cmdln.main(cli, {argv: argv, ...other options...});  # new
 
 - Reduce the npm package size (drop tests, examples, build tools, etc.)
 

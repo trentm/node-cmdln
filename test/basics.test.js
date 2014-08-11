@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Trent Mick. All rights reserved.
+ * Copyright (c) 2014 Trent Mick. All rights reserved.
  *
  * node-cmdln tests
  */
@@ -25,6 +25,19 @@ var before = tap4nodeunit.before;
 var test = tap4nodeunit.test;
 
 var cmdln = require('../lib/cmdln');
+
+
+// ---- internal support stuff
+
+function objCopy(obj, target) {
+    if (!target) {
+        target = {};
+    }
+    Object.keys(obj).forEach(function (k) {
+        target[k] = obj[k];
+    });
+    return target;
+}
 
 
 // ---- tests
@@ -186,24 +199,160 @@ var cases = [
         }
     },
 
+    // `cmdln.main() options
+    {
+        cmd: 'main-opts.js',
+        expect: {
+            code: 1,
+            stdout: /main-opts help/,
+            stderr: /^$/
+        }
+    },
+    {
+        cmd: 'main-opts.js',
+        env: {
+            MAIN_OPTS_SHOW_NO_COMMAND_ERR: '1'
+        },
+        expect: {
+            code: 1,
+            stderr: /main-opts: error: no command given/
+        }
+    },
+    {
+        cmd: 'main-opts.js',
+        env: {
+            MAIN_OPTS_SHOW_NO_COMMAND_ERR: '1',
+            MAIN_OPTS_SHOW_CODE: '1'
+        },
+        expect: {
+            code: 1,
+            stderr: /main-opts: error \(NoCommand\): no command given/
+        }
+    },
+    {
+        cmd: 'main-opts.js',
+        env: {
+            MAIN_OPTS_SHOW_NO_COMMAND_ERR: '1',
+            MAIN_OPTS_SHOW_CODE: '1',
+            MAIN_OPTS_SHOW_ERR_STACK: '1'
+        },
+        expect: {
+            code: 1,
+            stderr: [
+                /main-opts: error \(NoCommand\): NoCommandError: no command given/,
+                /cmdln\.js:/
+            ]
+        }
+    },
+    {
+        cmd: 'main-opts.js --verbose',
+        env: {
+            MAIN_OPTS_SHOW_NO_COMMAND_ERR: '1',
+            MAIN_OPTS_SHOW_CODE: '1',
+        },
+        expect: {
+            code: 1,
+            stderr: [
+                /main-opts: error \(NoCommand\): NoCommandError: no command given/,
+                /cmdln\.js:/
+            ]
+        }
+    },
+    {
+        cmd: 'main-opts.js',
+        env: {
+            MAIN_OPTS_SHOW_NO_COMMAND_ERR: '1',
+            MAIN_OPTS_SHOW_CODE: '1',
+            MAIN_OPTS_ARGV: 'node,main-opts.js,--verbose'
+        },
+        expect: {
+            code: 1,
+            stderr: [
+                /main-opts: error \(NoCommand\): NoCommandError: no command given/,
+                /cmdln\.js:/
+            ]
+        }
+    },
 
+    // Test bwcompat support for v1 `cmdln.main()`.
+    {
+        cmd: 'bwcompat-main-v1.js',
+        expect: {
+            code: 1,
+            stdout: /bwcompat-main-v1 help/,
+            stderr: /bwcompat-main-v1: error: no command given/
+        }
+    },
+    {
+        cmd: 'bwcompat-main-v1.js',
+        env: {
+            DEBUG: '1'
+        },
+        expect: {
+            code: 1,
+            stderr: [
+                /bwcompat-main-v1: error: NoCommandError: no command given/,
+                /cmdln\.js:/
+            ]
+        }
+    },
+    {
+        cmd: 'bwcompat-main-v1.js',
+        env: {
+            BWCOMPAT_MAIN_V1_SHOW_CODE: '1'
+        },
+        expect: {
+            code: 1,
+            stderr: [
+                /bwcompat-main-v1: error \(NoCommand\): no command given/
+            ]
+        }
+    },
+    {
+        cmd: 'bwcompat-main-v1.js',
+        env: {
+            BWCOMPAT_MAIN_V1_ARGV: ',,--asdf'
+        },
+        expect: {
+            code: 1,
+            stderr: [
+                /bwcompat-main-v1: error: unknown option: "--asdf"/
+            ]
+        }
+    },
 ];
 
 cases.forEach(function (c, i) {
     var expect = c.expect;
     var cmd = c.cmd;
-    var name = format('case %d: %s', i, c.cmd);
+    var env = c.env;
+    var envStr = '';
+    if (env) {
+        Object.keys(env).forEach(function (e) {
+            envStr += format('%s=%s ', e, env[e]);
+        });
+    }
+    var name = format('case %d: %s%s', i, envStr, c.cmd);
+
     if (process.env.TEST_FILTER && name.indexOf(process.env.TEST_FILTER) === -1) {
         debug('skip test "%s": does not match TEST_FILTER "%s"',
             name, process.env.TEST_FILTER);
         return;
     }
+
     test(name, function (t) {
         debug('--');
         var opts = {
             cwd: path.resolve(__dirname, '..')
         };
-        var realCmd = cmd.replace(/conan.js/, 'node examples/conan.js');
+        var realCmd = cmd
+                .replace(/^conan\.js/, 'node examples/conan.js')
+                .replace(/^([\w-]+)\.js/, 'node test/cmd/$1.js');
+        debug('cmd:', realCmd);
+        if (env) {
+            debug('env: %j', env);
+            opts.env = objCopy(process.env, objCopy(env));
+        }
         exec(realCmd, opts, function (err, stdout, stderr) {
             debug('err:', err);
             debug('code:', err && err.code);

@@ -1,5 +1,6 @@
+#!/usr/bin/env node
 /*
- * A `conan` CLI.
+ * A `conan` CLI. See the README for an intro here.
  */
 
 var p = console.log;
@@ -16,6 +17,7 @@ function Conan() {
         // Custom options. By default you get -h/--help.
         options: [
             {names: ['help', 'h'], type: 'bool', help: 'Print help and exit.'},
+            {names: ['verbose', 'v'], type: 'bool', help: 'Verbose output.'},
             {name: 'version', type: 'bool', help: 'Print version and exit.'},
             {name: 'x', type: 'bool', help: 'Be more excited about it.'}
         ]
@@ -29,6 +31,9 @@ Conan.prototype.init = function (opts, args, callback) {
         p(this.name, VERSION);
         callback(false);
         return;
+    }
+    if (opts.verbose) {
+        self.showErrStack = true;
     }
     // Cmdln class handles `opts.help`.
     Cmdln.prototype.init.apply(this, arguments);
@@ -108,5 +113,5 @@ Conan.prototype.do_hear.options = [];
 
 
 if (require.main === module) {
-    cmdln.main(Conan);
+    cmdln.main(new Conan());
 }
