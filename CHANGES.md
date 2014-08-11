@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 2.0.0 (not yet released)
+## 2.0.0
 
 - Improvements to the `cmdln.main()` function:
 
