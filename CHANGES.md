@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 2.1.0 (not yet released)
+## 2.1.0
 
 - Support sub-subcommands (like `git remote add|rename|remove ...`) simply by
   setting `do_<subcmd>` to another `Cmdln` subclass for the subcommand.
