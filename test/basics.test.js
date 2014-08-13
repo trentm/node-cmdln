@@ -335,6 +335,107 @@ var cases = [
             stdout: 'ran init\nhi\nran fini: hi'
         }
     },
+
+    // Test sub-sub-commands.
+    {
+        cmd: 'subsubcmd.js',
+        expect: {
+            code: 1,
+            stdout: [
+                /^\s+blah\s+blah help/m,
+                /^\s+sub\s+sub desc/m
+            ]
+        }
+    },
+    {
+        cmd: 'subsubcmd.js help',
+        expect: {
+            code: 0,
+            stdout: [
+                /^\s+blah\s+blah help/m,
+                /^\s+sub\s+sub desc/m
+            ]
+        }
+    },
+    {
+        cmd: 'subsubcmd.js help sub',
+        expect: {
+            stdout: [
+                /^sub desc/,
+                /^\s+bleep\s+sub bleep help/m
+            ],
+            notStdout: [
+                /^\s+bloop/m
+            ]
+        }
+    },
+    {
+        cmd: 'subsubcmd.js sub help',
+        expect: {
+            stdout: [
+                /^sub desc/,
+                /^\s+bleep\s+sub bleep help/m
+            ],
+            notStdout: [
+                /^\s+bloop/m
+            ]
+        }
+    },
+    {
+        cmd: 'subsubcmd.js sub help bloop',
+        expect: {
+            stdout: /^sub bloop help/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js help sub bloop',
+        expect: {
+            stdout: /^sub bloop help/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js sub help bleep',
+        expect: {
+            stdout: /^sub bleep help/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js blah',
+        expect: {
+            stdout: /^top blah: args=\s+$/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js blah one two',
+        expect: {
+            stdout: /^top blah: args=one,two\s+$/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js sub',
+        expect: {
+            stdout: /^top sub: top.opts.verbose=false sub.opts.s=false\s+$/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js sub -s',
+        expect: {
+            stdout: /^top sub: top.opts.verbose=false sub.opts.s=true\s+$/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js -v sub bleep -s',
+        expect: {
+            code: 1,
+            stderr: /^top sub: error: unknown option: "-s"\s+/
+        }
+    },
+    {
+        cmd: 'subsubcmd.js -v sub -s bleep -t one two three',
+        expect: {
+            stdout: /^top sub bleep: top.opts.verbose=true sub.opts.s=true opts.t=one args=two,three\s+$/
+        }
+    }
 ];
 
 cases.forEach(function (c, i) {
@@ -396,7 +497,18 @@ cases.forEach(function (c, i) {
                     if (typeof(pat) === 'string') {
                         pat = new RegExp(pat);
                     }
-                    t.ok(pat.test(stdout), format('stdout does not match %s: %s',
+                    t.ok(pat.test(stdout), format(
+                        'stdout does not match %s: "%s"', pat, stdout));
+                });
+            }
+            if (expect.notStdout) {
+                var pats = (Array.isArray(expect.notStdout)
+                    ? expect.notStdout : [expect.notStdout]);
+                pats.forEach(function (pat) {
+                    if (typeof(pat) === 'string') {
+                        pat = new RegExp(pat);
+                    }
+                    t.ok(!pat.test(stdout), format('stdout matches %s: %s',
                         pat, stdout));
                 });
             }

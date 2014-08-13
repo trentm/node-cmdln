@@ -1,8 +1,41 @@
 # node-cmdln Changelog
 
-## 2.0.1 (not yet released)
+## 2.1.0 (not yet released)
 
-(nothing yet)
+- Support sub-subcommands (like `git remote add|rename|remove ...`) simply by
+  setting `do_<subcmd>` to another `Cmdln` subclass for the subcommand.
+  Basically like this:
+
+        function GitRemote(parent) {
+            this.parent = parent;
+            Cmdln.call(this, {
+                name: 'git remote',
+                // ...
+            });
+        }
+        util.inherits(GitRemote, Cmdln);
+
+        GitRemote.prototype.emptyLine = function (cb) {
+            // ... implement `git remote`
+        };
+
+        GitRemote.prototype.do_add = function (subcmd, opts, args, cb) {
+            // ... implment `git remote add`
+            cb();
+        };
+
+
+        function Git() {
+            Cmdln.call(this, {
+                name: 'git',
+                // ...
+            });
+        }
+        util.inherits(Git, Cmdln);
+
+        Git.prototype.do_remote = GitRemote;
+
+  See [examples/fauxgit.js](./examples/fauxgit.js) for a more complete example.
 
 
 ## 2.0.0

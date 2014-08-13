@@ -33,7 +33,7 @@ Conan.prototype.init = function (opts, args, callback) {
         return;
     }
     if (opts.verbose) {
-        self.showErrStack = true;
+        this.showErrStack = true;
     }
     // Cmdln class handles `opts.help`.
     Cmdln.prototype.init.apply(this, arguments);

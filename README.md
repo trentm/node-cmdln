@@ -24,9 +24,9 @@ function Conan() {
 }
 util.inherits(Conan, cmdln.Cmdln);
 
-Conan.prototype.do_crush = function do_crush(subcmd, opts, args, callback) {
+Conan.prototype.do_crush = function do_crush(subcmd, opts, args, cb) {
     console.log('Yargh!');
-    callback();
+    cb();
 };
 Conan.prototype.do_crush.help = 'Crush your enemies.';
 
@@ -64,9 +64,9 @@ Option processing (using [dashdash](https://github.com/trentm/node-dashdash))
 is integrated. `do_crush` above could be replaced with:
 
 ```javascript
-Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
+Conan.prototype.do_crush = function (subcmd, opts, args, cb) {
     if (opts.help) {
-        this.do_help('help', {}, [subcmd], callback);
+        this.do_help('help', {}, [subcmd], cb);
         return;
     }
     if (!args.length) {
@@ -76,7 +76,7 @@ Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
             console.log('Smite %s with a %s!', enemy, opts.weapon);
         });
     }
-    callback();
+    cb();
 };
 Conan.prototype.do_crush.options = [
     {
@@ -130,28 +130,65 @@ See [examples/conan.js](examples/conan.js) for the complete example. Run
 
 # Reference
 
-In general, please read the comments in the source. The API is far from fully
-documented here.
+In general, please read the comments in [the source](./lib/cmdln.js) and
+[browse the examples](./examples/). The API is far from fully documented here.
 
 ## `cmdln.Cmdln`
 
-To use this module you create an object that inherits from `cmdln.Cmdln`. There
-are a number of relevant methods and fields on `Cmdln` that can be used.
+To use this module you create a class that inherits from `cmdln.Cmdln`; add
+some methods to that class that define the tool's commands, options, etc.;
+then pass an instance to `cmdln.main()`. Roughly like this:
 
-- `new <Cmdln>(config)` Create a Cmdln subclass instance. See the block comment
-  in the code for docs.
+    function CLI() {
+        cmdln.Cmdln.call(this, {<config>});
+    }
+    util.inherits(CLI, cmdln.Cmdln);
+    ...
+    var cli = new CLI();
+    cmdln.main(cli);
 
-- `<Cmdln>.do_<subcmd>(subcmd, opts, args, callback)` is how a subcommand is
-  defined. See the
+We'll use the `CLI` and `cli` names as used above in the following reference:
 
-- `<Cmdln>.init(opts, args, callback)` Hook run after option processing
+- `new Cmdln(<config>)` Create a Cmdln subclass instance. See the block comment
+  in the code for full documentation on the `config` options.
+
+- `CLI.prototype.do_<subcmd> = function (subcmd, opts, args, cb)` is how a
+  subcommand is defined. How the subcmd is handled can be customize with some
+  properties (e.g. `options`, `help`) on the handler function.
+
+- `CLI.prototype.do_<subcmd> = <SubCLI>;` Alternatively a `do_<subcmd>` can
+  be set to another Cmdln subclass to support sub-subcommands, like
+  `git remote add|remove|rename|...`. See
+  ["examples/fauxgit.js"](./examples/fauxgit.js) for an example.
+
+- `CLI.prototype.do_<subcmd>.options = <object>;` is how to set the options
+  (in [dashdash](https://github.com/trentm/node-dashdash) format) for that
+  subcommand.
+
+- `CLI.prototype.do_<subcmd>.help = <string>;` to set the help string for a
+  subcommand.
+
+- `CLI.prototype.do_<subcmd>.help = function (subcmd, opts, args, cb)` is
+  an alternate method to handle help for a subcommand. The given function
+  will be run when `tool help <subcmd>` is called.
+
+- `CLI.prototype.do_<subcmd>.desc = <string>;` can be set to a short string
+  to be used in the `tool help` output to summarize subcmd. If not provided,
+  then the first line of `do_<subcmd>.help` will be used.
+
+- `CLI.prototype.do_<subcmd>.hidden = <boolean>;` Set to false to have
+  `tool help` output *not* list this subcmd.
+
+- `<Cmdln>.prototype.init(opts, args, cb)` Hook run after option processing
   (`this.opts` is set), but before the subcommand handler is run.
 
-- `<Cmdln>.fini(subcmd, callback)` Hook run after the subcommand handler is
+- `<Cmdln>.prototype.fini(subcmd, cb)` Hook run after the subcommand handler is
   run.
 
 - `<Cmdln>.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
-  print a full stack on a shown error.
+  print a full stack on a shown error. When wanted, this is typically set
+  in If you want this option it is typically
+  set either
 
 - `<Cmdln>.handlerFromSubcmd(<subcmd>)` will return the appropriate
   `do_<subcmd>` method that handles the given sub-command. This resolves
