@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 2.1.2 (not yet released)
+
+(nothing yet)
+
+
 ## 2.1.1
 
 - Make sure to carry over all properties set on a sub-subcommand handler class
