@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 2.1.1 (not yet released)
+## 2.1.1
 
 - Make sure to carry over all properties set on a sub-subcommand handler class
   to the implicit handler function created.  E.g., `myCustomFlag` in the
