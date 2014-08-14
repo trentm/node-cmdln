@@ -26,6 +26,7 @@ util.inherits(Sub, Cmdln);
 Sub.prototype.emptyLine = function (cb) {
     p('top sub: top.opts.verbose=%s sub.opts.s=%s',
       this.top.opts.verbose, this.opts.s);
+    cb();
 };
 
 Sub.prototype.do_bleep = function (subcmd, opts, args, cb) {

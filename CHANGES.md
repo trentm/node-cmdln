@@ -2,7 +2,12 @@
 
 ## 2.1.1 (not yet released)
 
-(nothing yet)
+- Make sure to carry over all properties set on a sub-subcommand handler class
+  to the implicit handler function created.  E.g., `myCustomFlag` in the
+  following:
+
+        Git.prototype.do_remote = GitRemote;
+        Git.prototype.do_remote.myCustomFlag = true;
 
 
 ## 2.1.0
