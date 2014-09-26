@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 2.1.3 (not yet released)
+
+(nothing yet)
+
+
 ## 2.1.2
 
 - Only use the *first line* of `<SubCmdln instance>.desc` for the sub-command
