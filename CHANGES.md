@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 2.1.2 (not yet released)
+## 2.1.2
 
 - Only use the *first line* of `<SubCmdln instance>.desc` for the sub-command
   list help output for a sub-subcommand handler.
