@@ -2,7 +2,8 @@
 
 ## 2.1.2 (not yet released)
 
-(nothing yet)
+- Only use the *first line* of `<SubCmdln instance>.desc` for the sub-command
+  list help output for a sub-subcommand handler.
 
 
 ## 2.1.1
