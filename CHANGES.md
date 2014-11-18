@@ -2,7 +2,8 @@
 
 ## 2.1.3 (not yet released)
 
-(nothing yet)
+- Update deps to latest (in particular to get a extsprintf version without
+  accidentally large included files).
 
 
 ## 2.1.2
