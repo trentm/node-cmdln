@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 2.1.4 (not yet released)
+
+(nothing yet)
+
+
 ## 2.1.3
 
 - Update deps to latest (in particular to get a extsprintf version without
