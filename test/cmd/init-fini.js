@@ -19,7 +19,7 @@ CLI.prototype.init = function (opts, args, callback) {
     cmdln.Cmdln.prototype.init.apply(this, arguments);
 };
 
-CLI.prototype.fini = function (subcmd, callback) {
+CLI.prototype.fini = function (subcmd, err, callback) {
     p('ran fini:', subcmd);
     callback();
 };

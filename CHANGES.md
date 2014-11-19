@@ -1,8 +1,23 @@
 # node-cmdln Changelog
 
-## 2.1.4 (not yet released)
+## 3.0.0 (not yet released)
 
-(nothing yet)
+- [Backward incompatible change] Change the signature of a `<cmdln>.fini` method
+  from:
+
+        MyCLI.prototype.fini = function fini(subcmd, cb) {
+
+  to:
+
+        MyCLI.prototype.fini = function fini(subcmd, err, cb) {
+
+  where `err` is the error returned by the invocation of the CLI. This allows
+  a `fini` method to use or deal with that error, if necessary.
+
+- Update `cmdln.main(...)` to support a `showErr` boolean as an option or
+  on the `<Cmdln>` instance. For example, this could allow a `fini` method
+  to suppress printing an error. By default errors from subcommands are shown
+  (i.e. the same current behaviour by default).
 
 
 ## 2.1.3
