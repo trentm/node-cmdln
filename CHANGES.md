@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.0.2 (not yet released)
+
+(nothing yet)
+
+
 ## 3.0.1
 
 - Allow one to override how option help is formatted for a subcmd by setting
