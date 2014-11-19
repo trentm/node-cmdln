@@ -1,3 +1,7 @@
+#
+# Copyright (c) 2014, Trent Mick. All rights reserved.
+# Copyright (c) 2014, Joyent, Inc. All rights reserved.
+#
 
 NODEUNIT = ./node_modules/.bin/nodeunit
 JSSTYLE_FILES := $(shell find lib -name "*.js")
