@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.0.0 (not yet released)
+## 3.0.0
 
 - [Backward incompatible change] Change the signature of a `<cmdln>.fini` method
   from:
