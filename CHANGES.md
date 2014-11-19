@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.0.1 (not yet released)
+## 3.0.1
 
 - Allow one to override how option help is formatted for a subcmd by setting
   `CLI.prototype.do_<subcmd>.helpOpts = <dashdash helpOpts object>;`. See
