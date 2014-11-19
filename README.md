@@ -165,6 +165,12 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   (in [dashdash](https://github.com/trentm/node-dashdash) format) for that
   subcommand.
 
+- `CLI.prototype.do_<subcmd>.helpOpts = <dashdash helpOpts object>;` to override
+  formatting settings for `options` help output for this command. By default
+  the `helpOpts` passed into the CLI constructor are used. The set of supported
+  helpOpts are defined by
+  [dashdash](https://github.com/trentm/node-dashdash#help-config).
+
 - `CLI.prototype.do_<subcmd>.help = <string>;` to set the help string for a
   subcommand.
 

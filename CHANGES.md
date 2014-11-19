@@ -2,7 +2,12 @@
 
 ## 3.0.1 (not yet released)
 
-(nothing yet)
+- Allow one to override how option help is formatted for a subcmd by setting
+  `CLI.prototype.do_<subcmd>.helpOpts = <dashdash helpOpts object>;`. See
+  supported helpOpts in [the dashdash help config
+  docs](https://github.com/trentm/node-dashdash#help-config).
+
+- Update to latest dashdash (1.7.1).
 
 
 ## 3.0.0
