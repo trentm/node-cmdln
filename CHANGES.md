@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.0.2 (not yet released)
+## 3.0.2
 
 - Change to use ['^' semver
   ranges](https://github.com/npm/node-semver#caret-ranges-123-025-004) for
