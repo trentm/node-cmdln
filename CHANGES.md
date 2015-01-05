@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.0.3 (not yet released)
+
+(nothing yet)
+
+
 ## 3.0.2
 
 - Change to use ['^' semver
