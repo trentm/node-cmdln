@@ -2,7 +2,10 @@
 
 ## 3.0.2 (not yet released)
 
-(nothing yet)
+- Change to use ['^' semver
+  ranges](https://github.com/npm/node-semver#caret-ranges-123-025-004) for
+  dependencies.  This allows for better de-duping under "node\_modules" for
+  apps using this package.
 
 
 ## 3.0.1
