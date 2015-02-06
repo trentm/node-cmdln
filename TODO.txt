@@ -1,6 +1,5 @@
 # 2.1?
 
-- support for sub-subcommands
 - bash completion generation support
 - docs: see below
 
