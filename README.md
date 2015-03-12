@@ -200,6 +200,10 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   `do_<subcmd>` method that handles the given sub-command. This resolves
   sub-command aliases.
 
+- `<Cmdln>.helpFromSubcmd(<subcmd>)` will return the help string for
+  that subcmd *or*, if defined, the help function defined for that subcmd.
+  This is used by the default `do_help` implementation.
+
 
 ## `cmdln.main()`
 

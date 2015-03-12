@@ -1,8 +1,18 @@
 # node-cmdln Changelog
 
-## 3.0.3 (not yet released)
+## 3.1.0 (not yet released)
 
-(nothing yet)
+- [issue #4] Add `Cmdln.prototype.helpFromSubcmd(subcmd)` to get the help string
+  for the given subcommand. This can be useful for tools that want to emit usage
+  information as part of a usage error. E.g.:
+
+        MyCLI.prototype.do_frob = do_frob(subcmd, opts, args, cb) {
+            if (!opts.frobber) {
+                return callback(new Error('you forgot the frobber\n' +
+                    this.helpFromSubcmd(subcmd)));
+            }
+            // ...
+        };
 
 
 ## 3.0.2
