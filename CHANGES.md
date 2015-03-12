@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.1.0 (not yet released)
+## 3.1.0
 
 - [issue #5] Add `helpSubcmds` constructor option to allow control over the
   output of the "Commands:" section of top-level help. For example, this code:
