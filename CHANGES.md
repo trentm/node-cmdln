@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.1.1 (not yet released)
+
+(nothing yet)
+
+
 ## 3.1.0
 
 - [issue #5] Add `helpSubcmds` constructor option to allow control over the
