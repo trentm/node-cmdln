@@ -435,6 +435,19 @@ var cases = [
         expect: {
             stdout: /^top sub bleep: top.opts.verbose=true sub.opts.s=true opts.t=one args=two,three\s+$/
         }
+    },
+
+    // Test helpSubcmds.
+    {
+        cmd: 'help-subcmds.js help',
+        expect: {
+            stdout: [
+                /Commands:\n    help/,
+                /\n\n    in-empty-group/,
+                /\n\n  Most Excellent Commands:\n    awesome/,
+                /\n\n  Other Commands:\n    something-else/,
+            ]
+        }
     }
 ];
 

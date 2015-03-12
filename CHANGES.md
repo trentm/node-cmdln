@@ -2,6 +2,34 @@
 
 ## 3.1.0 (not yet released)
 
+- [issue #5] Add `helpSubcmds` constructor option to allow control over the
+  output of the "Commands:" section of top-level help. For example, this code:
+
+        helpSubcmds: [
+            'help',
+            { group: '' },
+            'in-empty-group',
+            { group: 'Most Excellent Commands' },
+            'awesome',
+            { group: 'Other Commands', unmatched: true }
+        ]
+
+  yields help output something like:
+
+        ...
+        Commands:
+            help (?)        Help on a specific sub-command.
+
+            in-empty-group  Do in-empty-group things.
+
+          Most Excellent Commands:
+            awesome         Do awesome things.
+
+          Other Commands:
+            something-else  Do something-else things.
+
+   By Josh Clulow.
+
 - [issue #4] Add `Cmdln.prototype.helpFromSubcmd(subcmd)` to get the help string
   for the given subcommand. This can be useful for tools that want to emit usage
   information as part of a usage error. E.g.:
