@@ -76,28 +76,28 @@ var cases = [
         cmd: 'conan.js -h',
         expect: {
             stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /hear/]
+                /^Commands/m, /crush/, /smash/, /hear/]
         }
     },
     {
         cmd: 'conan.js --help',
         expect: {
             stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /hear/]
+                /^Commands/m, /crush/, /smash/, /hear/]
         }
     },
     {
         cmd: 'conan.js help',
         expect: {
             stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /hear/]
+                /^Commands/m, /crush/, /smash/, /hear/]
         }
     },
     {
         cmd: 'conan.js ?',
         expect: {
             stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /hear/]
+                /^Commands/m, /crush/, /smash/, /hear/]
         }
     },
 
@@ -133,6 +133,18 @@ var cases = [
     {
         cmd: 'conan.js crush --weapon spear Sally',
         expect: { stdout: /^Smite Sally with a spear!/ }
+    },
+    
+    // alias
+    {
+        cmd: 'conan.js smash Bob',
+        expect: { stdout: /^Smite Bob with a sword!/ }
+    },
+
+    // hidden alias
+    {
+        cmd: 'conan.js pulverize Bob',
+        expect: { stdout: /^Smite Bob with a sword!/ }
     },
 
     // subcmd help

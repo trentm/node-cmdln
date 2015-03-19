@@ -56,6 +56,8 @@ Conan.prototype.do_crush = function (subcmd, opts, args, callback) {
     }
     callback();
 };
+Conan.prototype.do_crush.aliases = [ 'smash' ];
+Conan.prototype.do_crush.hiddenAliases = [ 'pulverize' ];
 Conan.prototype.do_crush.options = [
     {
         names: ['help', 'h'],
