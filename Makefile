@@ -1,6 +1,6 @@
 #
-# Copyright (c) 2014, Trent Mick. All rights reserved.
-# Copyright (c) 2014, Joyent, Inc. All rights reserved.
+# Copyright (c) 2015, Trent Mick. All rights reserved.
+# Copyright (c) 2015, Joyent, Inc. All rights reserved.
 #
 
 NODEUNIT = ./node_modules/.bin/nodeunit
@@ -51,4 +51,3 @@ versioncheck:
 cutarelease: versioncheck
 	[[ `git status | tail -n1` == "nothing to commit, working directory clean" ]]
 	./tools/cutarelease.py -p cmdln -f package.json
-

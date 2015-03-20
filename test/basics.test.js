@@ -120,6 +120,7 @@ var cases = [
     },
     {
         cmd: 'conan.js crush Bob -w',
+        /* JSSTYLED */
         expect: { err: /do not have enough args for "-w"/ }
     },
     {
@@ -134,7 +135,7 @@ var cases = [
         cmd: 'conan.js crush --weapon spear Sally',
         expect: { stdout: /^Smite Sally with a spear!/ }
     },
-    
+
     // alias
     {
         cmd: 'conan.js smash Bob',
@@ -151,22 +152,22 @@ var cases = [
     {
         cmd: 'conan.js help crush',
         expect: {
-            stdout: [/^Crush your enemies/, /^Usage/m, /conan crush/,
-                /-w WEAPON, --weapon=WEAPON/, /^Options:/m]
+            stdout: [ /^Crush your enemies/, /^Usage/m, /conan crush/,
+                /-w WEAPON, --weapon=WEAPON/, /^Options:/m ]
         }
     },
     {
         cmd: 'conan.js crush -h',
         expect: {
-            stdout: [/^Crush your enemies/, /^Usage/m, /conan crush/,
-                /-w WEAPON, --weapon=WEAPON/, /^Options:/m]
+            stdout: [ /^Crush your enemies/, /^Usage/m, /conan crush/,
+                /-w WEAPON, --weapon=WEAPON/, /^Options:/m ]
         }
     },
     {
         cmd: 'conan.js crush --help',
         expect: {
-            stdout: [/^Crush your enemies/, /^Usage/m, /conan crush/,
-                /-w WEAPON, --weapon=WEAPON/, /^Options:/m]
+            stdout: [ /^Crush your enemies/, /^Usage/m, /conan crush/,
+                /-w WEAPON, --weapon=WEAPON/, /^Options:/m ]
         }
     },
 
