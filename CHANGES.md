@@ -1,8 +1,14 @@
 # node-cmdln Changelog
 
-## 3.1.1 (not yet released)
+## 3.2.0 (not yet released)
 
-(nothing yet)
+- [pull #7] Support for *hidden* command aliases to allow renaming a command
+  while preserving the old name (though not documenting it).
+
+        MyCLI.prototype.do_frob.hiddenAliases = ['ye-old-frob'];
+        MyCLI.prototype.do_frob.aliases = ['fr'];
+
+  By Dave Pacheco.
 
 
 ## 3.1.0
