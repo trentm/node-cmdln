@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.2.0 (not yet released)
+## 3.2.0
 
 - [pull #7] Support for *hidden* command aliases to allow renaming a command
   while preserving the old name (though not documenting it).
