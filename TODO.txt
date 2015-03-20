@@ -1,9 +1,3 @@
-# 2.1?
-
-- bash completion generation support
-- docs: see below
-
-
 # bash completion
 
 Some thoughts. See `npm completion` for some inspiration.

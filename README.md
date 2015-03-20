@@ -156,10 +156,19 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   subcommand is defined. How the subcmd is handled can be customize with some
   properties (e.g. `options`, `help`) on the handler function.
 
-- `CLI.prototype.do_<subcmd> = <SubCLI>;` Alternatively a `do_<subcmd>` can
-  be set to another Cmdln subclass to support sub-subcommands, like
-  `git remote add|remove|rename|...`. See
+- `CLI.prototype.do_<subcmd> = <SubCLI>;` Instead of a function handler for a
+  subcommand, a `do_<subcmd>` can be set to another Cmdln subclass to support
+  sub-subcommands, like `git remote add|remove|rename|...`. See
   ["examples/fauxgit.js"](./examples/fauxgit.js) for an example.
+
+- `CLI.prototype.do_<subcmd>.aliases = <array of strings>;` to define one or
+  more aliases for a command. These aliases are shown in the "Commands:"
+  section of the generated help output.
+
+- `CLI.prototype.do_<subcmd>.hiddenAliases = <array of strings>;` to define one
+  or more aliases for a command **that are not shown in the generated help
+  output**. This can be useful when renaming a subcommand in a new version of
+  a tool and still support the old name.
 
 - `CLI.prototype.do_<subcmd>.options = <object>;` is how to set the options
   (in [dashdash](https://github.com/trentm/node-dashdash) format) for that
