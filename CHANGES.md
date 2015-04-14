@@ -2,7 +2,7 @@
 
 ## 3.2.1 (not yet released)
 
-(nothing yet)
+- [issue #8] Fix error class name in stack traces in node 0.12 and later.
 
 
 ## 3.2.0
