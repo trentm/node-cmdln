@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.2.2 (not yet released)
+
+(nothing yet)
+
+
 ## 3.2.1
 
 - [issue #8] Fix error class name in stack traces in node 0.12 and later.
