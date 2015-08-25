@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.2.3 (not yet released)
+
+(nothing yet)
+
+
 ## 3.2.2
 
 - Don't error with:
