@@ -2,7 +2,11 @@
 
 ## 3.2.2 (not yet released)
 
-(nothing yet)
+- Don't error with:
+
+        Error: "helpSubcmds" error: unmatched command handlers found: foo, bar
+
+  if the "foo" and "bar" commands are hidden (via `do_foo.hidden = true`).
 
 
 ## 3.2.1
