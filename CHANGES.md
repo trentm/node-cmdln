@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.2.3 (not yet released)
+## 3.2.3
 
 - Add support for `MyCLI.prototype.do_frob.interspersedOptions = false`
   to disable interspersed options (i.e. options after the first argument)
