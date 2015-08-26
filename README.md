@@ -194,6 +194,10 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
 - `CLI.prototype.do_<subcmd>.hidden = <boolean>;` Set to false to have
   `tool help` output *not* list this subcmd.
 
+- `CLI.prototype.do_<subcmd>.interspersedOptions = <boolean>;` Set to
+  false to have `tool <subcmd> ...` not allow interspersed options
+  (i.e. options after the first argument.
+
 - `<Cmdln>.prototype.init(opts, args, cb)` Hook run after option processing
   (`this.opts` is set), but before the subcommand handler is run.
 

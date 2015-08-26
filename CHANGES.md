@@ -2,7 +2,10 @@
 
 ## 3.2.3 (not yet released)
 
-(nothing yet)
+- Add support for `MyCLI.prototype.do_frob.interspersedOptions = false`
+  to disable interspersed options (i.e. options after the first argument)
+  to a given command. By default cmdln allows interspersed options
+  for subcommands (using the node-dashdash default).
 
 
 ## 3.2.2
