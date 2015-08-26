@@ -81,6 +81,19 @@ Conan.prototype.do_crush.help = (
     + '{{options}}'
 );
 
+Conan.prototype.do_completion = function (subcmd, opts, args, callback) {
+    this.bashCompletion();
+    callback();
+};
+
+Conan.prototype.do_completion.help = (
+    'Print bash completion.\n'
+    + '\n'
+    + 'Usage:\n'
+    + '     {{name}} completion\n'
+    + '\n'
+    + '{{options}}'
+);
 
 Conan.prototype.do_see = function (subcmd, opts, args, callback) {
     var x = (this.opts.x || opts.x ? ' Yarg!' : '');
