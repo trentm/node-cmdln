@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.2.4 (not yet released)
+
+(nothing yet)
+
+
 ## 3.2.3
 
 - Add support for `MyCLI.prototype.do_frob.interspersedOptions = false`
