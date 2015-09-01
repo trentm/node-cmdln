@@ -2,7 +2,9 @@
 
 ## 3.2.4 (not yet released)
 
-(nothing yet)
+- Add support for `MyCLI.prototype.do_frob.allowUnknownOptions = true`.
+  Instead of raising a usage error, unknown options to that subcommand
+  will be passed through in `args`.
 
 
 ## 3.2.3
