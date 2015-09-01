@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.2.5 (not yet released)
+
+(nothing yet)
+
+
 ## 3.2.4
 
 - Add support for `MyCLI.prototype.do_frob.allowUnknownOptions = true`.
