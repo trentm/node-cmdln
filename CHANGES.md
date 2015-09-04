@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.3.1 (not yet released)
+
+(nothing yet)
+
+
 ## 3.3.0
 
 - `<MyCLI instance>.bashCompletions()` will generate bash completions
