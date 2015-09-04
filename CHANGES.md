@@ -1,8 +1,22 @@
 # node-cmdln Changelog
 
-## 3.2.5 (not yet released)
+## 3.3.0 (not yet released)
 
-(nothing yet)
+- `<MyCLI instance>.bashCompletions()` will generate bash completions
+  for the `MyCLI` tool. You can add, e.g., a 'completion(s)' command
+  to your CLI for users to run. Or you could generate completions
+  and distribute those with your tool.
+
+  See "examples/conan.js" for example usage.
+
+        $ alias conan="node examples/conan.js"
+        $ conan completion > conan.completion
+        $ source conan.completion
+        $ conan <TAB>
+        --help      --version   -v          completion  hear        see
+        --verbose   -h          -x          crush       help        smash
+
+  Bash completion support is mostly by <github.com/bahamas10>.
 
 
 ## 3.2.4

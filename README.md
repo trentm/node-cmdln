@@ -128,6 +128,33 @@ See [examples/conan.js](examples/conan.js) for the complete example. Run
 `node example/conan.js ...` to try it out.
 
 
+# Bash completion
+
+One can generate Bash completion code for a `Cmdln` subclass via
+
+    cli.bashCompletion()
+
+One possible usage is to add a `completion` subcmd to your CLI:
+
+    CLI.prototype.do_completion = function (subcmd, opts, args, cb) {
+        console.log( this.bashCompletion() );
+        cb();
+    };
+
+and get users to use that to setup Bash completion:
+
+    $ alias conan="node examples/conan.js"
+    $ conan completion > conan.completion
+    $ source conan.completion
+    $ conan <TAB>
+    --help      --version   -v          completion  hear        see
+    --verbose   -h          -x          crush       help        smash
+
+
+Another potential usage could be to pre-generate a completion file for, and
+distribute it with, your tool.
+
+
 # Reference
 
 In general, please read the comments in [the source](./lib/cmdln.js) and
@@ -201,24 +228,27 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
 - `CLI.prototype.do_<subcmd>.allowUnknownOptions = <boolean>;` Set to
   true to have `tool <subcmd> ...` allow unknown options.
 
-- `<Cmdln>.prototype.init(opts, args, cb)` Hook run after option processing
+- `CLI.prototype.init(opts, args, cb)` Hook run after option processing
   (`this.opts` is set), but before the subcommand handler is run.
 
-- `<Cmdln>.prototype.fini(subcmd, cb)` Hook run after the subcommand handler is
+- `CLI.prototype.fini(subcmd, cb)` Hook run after the subcommand handler is
   run.
 
-- `<Cmdln>.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
+- `cli.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
   print a full stack on a shown error. When wanted, this is typically set
   in If you want this option it is typically
   set either
 
-- `<Cmdln>.handlerFromSubcmd(<subcmd>)` will return the appropriate
+- `cli.handlerFromSubcmd(<subcmd>)` will return the appropriate
   `do_<subcmd>` method that handles the given sub-command. This resolves
   sub-command aliases.
 
-- `<Cmdln>.helpFromSubcmd(<subcmd>)` will return the help string for
+- `cli.helpFromSubcmd(<subcmd>)` will return the help string for
   that subcmd *or*, if defined, the help function defined for that subcmd.
   This is used by the default `do_help` implementation.
+
+- `cli.bashCompletion()` generates and returns bash completion for
+  the CLI.
 
 
 ## `cmdln.main()`

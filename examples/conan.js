@@ -82,7 +82,7 @@ Conan.prototype.do_crush.help = (
 );
 
 Conan.prototype.do_completion = function (subcmd, opts, args, callback) {
-    this.bashCompletion();
+    console.log( this.bashCompletion() );
     callback();
 };
 
