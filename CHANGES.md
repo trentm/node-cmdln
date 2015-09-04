@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.3.0 (not yet released)
+## 3.3.0
 
 - `<MyCLI instance>.bashCompletions()` will generate bash completions
   for the `MyCLI` tool. You can add, e.g., a 'completion(s)' command
