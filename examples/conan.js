@@ -76,7 +76,7 @@ Conan.prototype.do_crush.help = (
     'Crush your enemies.\n'
     + '\n'
     + 'Usage:\n'
-    + '     {{name}} crush [OPTIONS] [ENEMIES...]\n'
+    + '     {{name}} {{cmd}} [OPTIONS] [ENEMIES...]\n'
     + '\n'
     + '{{options}}'
 );
@@ -90,7 +90,7 @@ Conan.prototype.do_completion.help = (
     'Print bash completion.\n'
     + '\n'
     + 'Usage:\n'
-    + '     {{name}} completion\n'
+    + '     {{name}} {{cmd}}\n'
     + '\n'
     + '{{options}}'
 );
@@ -110,7 +110,7 @@ Conan.prototype.do_see.help = (
     'See them driven before you.\n'
     + '\n'
     + 'Usage:\n'
-    + '     {{name}} see [OPTIONS] [ENEMIES...]\n'
+    + '     {{name}} {{cmd}} [OPTIONS] [ENEMIES...]\n'
     + '\n'
     + '{{options}}'
 );
