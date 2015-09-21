@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Trent Mick. All rights reserved.
+ * Copyright (c) 2015 Trent Mick. All rights reserved.
  *
  * node-cmdln tests
  */
@@ -461,7 +461,39 @@ var cases = [
                 /\n\n  Other Commands:\n    something-else/,
             ]
         }
+    },
+
+    // Test {{cmd}} help template var.
+    {
+        cmd: 'cmd-template-var.js',
+        expect: {
+            code: 1,
+            stdout: [
+                /^\s+awesome\s+Usage: cmd-template-var awesome .../m,
+                /^\s+lame\s+Usage: cmd-template-var lame .../m,
+            ]
+        }
+    },
+    {
+        cmd: 'cmd-template-var.js help',
+        expect: {
+            code: 0,
+            stdout: [
+                /^\s+awesome\s+Usage: cmd-template-var awesome .../m,
+                /^\s+lame\s+Usage: cmd-template-var lame .../m,
+            ]
+        }
+    },
+    {
+        cmd: 'cmd-template-var.js help awesome',
+        expect: {
+            code: 0,
+            stdout: [
+                /^Usage: cmd-template-var awesome .../m,
+            ]
+        }
     }
+
 ];
 
 cases.forEach(function (c, i) {

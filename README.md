@@ -96,7 +96,7 @@ Conan.prototype.do_crush.help = (
     'Crush your enemies.\n'
     + '\n'
     + 'Usage:\n'
-    + '     {{name}} crush [OPTIONS] [ENEMIES...]\n'
+    + '     {{name}} {{cmd}} [OPTIONS] [ENEMIES...]\n'
     + '\n'
     + '{{options}}'
 );
@@ -208,7 +208,10 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   [dashdash](https://github.com/trentm/node-dashdash#help-config).
 
 - `CLI.prototype.do_<subcmd>.help = <string>;` to set the help string for a
-  subcommand.
+  subcommand. This supports some template variables:
+
+    - `{{name}}` becomes `cli.name` (i.e. the tool name).
+    - `{{cmd}}` becomes the sub-command name.
 
 - `CLI.prototype.do_<subcmd>.help = function (subcmd, opts, args, cb)` is
   an alternate method to handle help for a subcommand. The given function
