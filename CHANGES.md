@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.4.0 (not yet released)
+## 3.4.0
 
 - [pull #10] Add the `{{cmd}}` template var for subcommand help text (by Dave
   Eddy).
