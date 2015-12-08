@@ -234,8 +234,31 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
 - `CLI.prototype.init(opts, args, cb)` Hook run after option processing
   (`this.opts` is set), but before the subcommand handler is run.
 
-- `CLI.prototype.fini(subcmd, cb)` Hook run after the subcommand handler is
-  run.
+- `CLI.prototype.fini(subcmd, err, cb)` Hook run after the subcommand handler is
+  run. Here `err` is the error returned by the invocation of the CLI. This allows
+  a `fini` method to use or deal with that error, if necessary. To just
+  pass that err on (to the calling `main`) do this:
+
+        CLI.prototype.fini = function fini(subcmd, err, cb) {
+            // Whatever finalization you want to do here (possibly with a
+            // `finiErr`) ...
+            cb(finiErr || err, subcmd);
+        };
+
+  (Note: The call signature to `fini` changed in cmdln v3. See the changelog
+  in CHANGES.md.)
+
+- [Backward incompatible change] Change the signature of a `<cmdln>.fini` method
+  from:
+
+        MyCLI.prototype.fini = function fini(subcmd, cb) {
+
+  to:
+
+        MyCLI.prototype.fini = function fini(subcmd, err, cb) {
+
+  where `err` is the error returned by the invocation of the CLI. This allows
+  a `fini` method to use or deal with that error, if necessary.
 
 - `cli.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
   print a full stack on a shown error. When wanted, this is typically set
