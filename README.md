@@ -285,6 +285,33 @@ how it works. Read the block comment on that function in "lib/cmdln.js" for
 the best docs.
 
 
+## `cmdln.dashdash`
+
+This is a re-export of the [dashdash](https://github.com/trentm/node-dashdash)
+option processing module that cmdln is using. This is exported so that calling
+code can add option *types* if wanted, via `cmdln.dashdash.addOptionType`. E.g.,
+
+    var cmdln = require('cmdln');
+
+    function parseCommaSepStringNoEmpties(option, optstr, arg) {
+        return arg.trim().split(/\s*,\s*/g)
+            .filter(function (part) { return part; });
+    }
+
+    cmdln.dashdash.addOptionType({
+        name: 'commaSepString',
+        takesArg: true,
+        helpArg: 'STRING',
+        parseArg: parseCommaSepStringNoEmpties
+    });
+
+    // ...
+
+
+See [the node-dashdash documentation](https://github.com/trentm/node-dashdash#custom-option-types)
+for details.
+
+
 # License
 
 MIT. See LICENSE.txt

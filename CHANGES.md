@@ -2,7 +2,7 @@
 
 ## 3.4.2 (not yet released)
 
-(nothing yet)
+- Re-export `dashdash` to allow callers to `cmdln.dashdash.addOptionType`.
 
 
 ## 3.4.1
