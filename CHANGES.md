@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.4.2 (not yet released)
+
+(nothing yet)
+
+
 ## 3.4.1
 
 - Fix a bug in `Cmdln.prototype.main` where it could callback twice if there was
