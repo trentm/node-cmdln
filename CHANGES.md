@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.4.3 (not yet released)
+
+(nothing yet)
+
+
 ## 3.4.2
 
 - Re-export `dashdash` to allow callers to `cmdln.dashdash.addOptionType`.
