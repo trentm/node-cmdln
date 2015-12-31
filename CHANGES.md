@@ -2,7 +2,10 @@
 
 ## 3.4.1 (not yet released)
 
-(nothing yet)
+- Fix a bug in `Cmdln.prototype.main` where it could callback twice if there was
+  an OptionError processing the top-level options. This wasn't noticed because
+  the commonly used `cmdln.main()` function that calls it would `process.exit`
+  on the first callback.
 
 
 ## 3.4.0
