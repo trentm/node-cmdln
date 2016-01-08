@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.5.0 (not yet released)
+## 3.5.0
 
 - Improved Bash completion. The bash completion generation support is now based
   on [node-dashdash v1.12's added Bash
