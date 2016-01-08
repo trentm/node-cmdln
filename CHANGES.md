@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.5.1 (not yet released)
+
+(nothing yet)
+
+
 ## 3.5.0
 
 - Improved Bash completion. The bash completion generation support is now based
