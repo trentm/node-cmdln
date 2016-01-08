@@ -150,9 +150,11 @@ and get users to use that to setup Bash completion:
     --help      --version   -v          completion  hear        see
     --verbose   -h          -x          crush       help        smash
 
+See the `do_completion` subcommand on "examples/conan.js" for a complete example
+of this.
 
-Another potential usage could be to pre-generate a completion file for, and
-distribute it with, your tool.
+Another potential usage could be to pre-generate a completion file and
+distribute it with your tool.
 
 
 # Reference

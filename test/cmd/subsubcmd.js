@@ -17,7 +17,7 @@ function Sub(parent) {
         name: 'top sub',
         desc: 'sub desc',
         options: [
-            {names: ['s'], type: 'bool', default: false},
+            {names: ['s'], type: 'bool', default: false, help: 'hiss'},
         ]
     });
 }
@@ -72,6 +72,13 @@ Top.prototype.do_blah = function (subcmd, opts, args, cb) {
     cb();
 };
 Top.prototype.do_blah.help = 'blah help';
+
+
+Top.prototype.do_completion = function (subcmd, opts, args, cb) {
+    console.log(this.bashCompletion());
+    cb();
+};
+Top.prototype.do_completion.hidden = true;
 
 
 Top.prototype.do_sub = Sub;

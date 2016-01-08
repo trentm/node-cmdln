@@ -1,8 +1,13 @@
 # node-cmdln Changelog
 
-## 3.4.3 (not yet released)
+## 3.5.0 (not yet released)
 
-(nothing yet)
+- Improved Bash completion. The bash completion generation support is now based
+  on [node-dashdash v1.12's added Bash
+  completion](https://github.com/trentm/node-dashdash#bash-completion). This
+  should vastly improve it. See [the
+  README](https://github.com/trentm/node-cmdln#bash-completion) for how to use
+  this with your tools.
 
 
 ## 3.4.2

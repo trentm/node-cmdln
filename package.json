@@ -1,6 +1,6 @@
 {
     "name": "cmdln",
-    "version": "3.4.3",
+    "version": "3.5.0",
     "description": "helper lib for creating CLI tools with subcommands; think `git`, `svn`, `zfs`",
     "author": "Trent Mick (http://trentm.com)",
     "main": "./lib/cmdln.js",
@@ -10,13 +10,13 @@
         "url": "git://github.com/trentm/node-cmdln.git"
     },
     "engines": ["node >=0.8.0"],
-    "keywords": ["cmdln", "cli", "tool"],
+    "keywords": ["cmdln", "cli", "tool", "bash", "completion"],
 
     "dependencies": {
         "assert-plus": "^0.1.5",
         "extsprintf": "^1.2.0",
         "verror": "^1.6.0",
-        "dashdash": "^1.7.1"
+        "dashdash": "^1.12.0"
     },
     "devDependencies": {
         "nodeunit": "0.9.0"

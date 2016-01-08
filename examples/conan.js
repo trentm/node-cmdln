@@ -82,18 +82,36 @@ Conan.prototype.do_crush.help = (
 );
 
 Conan.prototype.do_completion = function (subcmd, opts, args, callback) {
+    if (opts.help) {
+        this.do_help('help', {}, [subcmd], callback);
+        return;
+    }
     console.log( this.bashCompletion() );
     callback();
 };
 
-Conan.prototype.do_completion.help = (
-    'Print bash completion.\n'
-    + '\n'
-    + 'Usage:\n'
-    + '     {{name}} {{cmd}}\n'
-    + '\n'
-    + '{{options}}'
-);
+Conan.prototype.do_completion.help = [
+    'Output bash completion code.',
+    '',
+    'Installation:',
+    '    {{name}} completion > /usr/local/etc/bash_completion.d/{{name}}',
+    '',
+    'Alternative installation:',
+    '    {{name}} completion > ~/.{{name}}.completion',
+    '    echo "source ~/.{{name}}.completion" >> ~/.bashrc',
+    '',
+    '{{options}}'
+].join('\n');
+
+Conan.prototype.do_completion.hidden = true;
+
+Conan.prototype.do_completion.options = [
+    {
+        names: ['help', 'h'],
+        type: 'bool',
+        help: 'Show this help.'
+    }
+]
 
 Conan.prototype.do_see = function (subcmd, opts, args, callback) {
     var x = (this.opts.x || opts.x ? ' Yarg!' : '');
