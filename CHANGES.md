@@ -2,7 +2,8 @@
 
 ## 3.5.1 (not yet released)
 
-(nothing yet)
+- Bash completion: Properly handle hidden subcmds, and new `includeHidden`
+  option to include them in completions.
 
 
 ## 3.5.0
