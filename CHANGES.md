@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.5.2 (not yet released)
+
+(nothing yet)
+
+
 ## 3.5.1
 
 - Bash completion: Properly handle hidden subcmds, and new `includeHidden`
