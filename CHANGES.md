@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.5.3 (not yet released)
+
+(nothing yet)
+
+
 ## 3.5.2
 
 - Guard against collisions in subcmd `aliases`.
