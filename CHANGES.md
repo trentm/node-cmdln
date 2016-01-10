@@ -2,7 +2,33 @@
 
 ## 3.5.2 (not yet released)
 
-(nothing yet)
+- Guard against collisions in subcmd `aliases`.
+
+- Change the `Cmdln.prototype.dispatch` call signature (the old signature
+  is still supported) to allow calling with unprocessed argv (as before)
+  and with process argv (i.e. with `args` and `opts`). This enables better
+  handling of "shortcut" commands.
+
+  E.g. the [`triton`](https://github.com/joyent/node-triton) uses this to
+  define a top-level `triton images` that is a shortcut for `triton image list`
+  like this:
+
+        function do_images(subcmd, opts, args, callback) {
+            // Hand off processing to 'image list' handler:
+            this.handlerFromSubcmd('image').dispatch({
+                subcmd: 'list',
+                opts: opts,
+                args: args
+            }, callback);
+        }
+
+        // Help specific to the shortcut:
+        do_images.help = 'A shortcut for "triton image list".';
+
+        // Present the same options (important for Bash completion generation):
+        do_images.options = require('./do_image/do_list').options;
+
+        module.exports = do_images;
 
 
 ## 3.5.1
