@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.5.4 (not yet released)
+
+(nothing yet)
+
+
 ## 3.5.3
 
 - Bash completion: Add `completionArgtypes`:
