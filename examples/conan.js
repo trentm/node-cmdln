@@ -69,9 +69,11 @@ Conan.prototype.do_crush.options = [
         helpArg: 'WEAPON',
         type: 'string',
         default: 'sword',
+        completionType: 'weapon',
         help: 'Weapon with which to smite.'
     }
 ];
+Conan.prototype.do_crush.completionArgtypes = ['enemy'];
 Conan.prototype.do_crush.help = (
     'Crush your enemies.\n'
     + '\n'
@@ -86,25 +88,37 @@ Conan.prototype.do_completion = function (subcmd, opts, args, callback) {
         this.do_help('help', {}, [subcmd], callback);
         return;
     }
-    console.log( this.bashCompletion() );
+    console.log( this.bashCompletion({
+        specExtra: [
+            // Define Bash completers for the 'weapon' and 'enemy' completion
+            // types we've used above. Enemies are a selection from
+            // <http://www.imdb.com/title/tt0082198/> plus current users on this
+            // system: `users`.
+            'function complete_enemy {',
+            '    local word="$1"',
+            '    compgen $compgen_opts -W "Thulsa-Doom King-Osric Subotai $(users)" -- "$word"',
+            '}',
+            'function complete_weapon {',
+            '    compgen $compgen_opts -W "bow-and-array mattock spear sword" -- "$1"',
+            '}'
+        ].join('\n')
+    }) );
     callback();
 };
-
 Conan.prototype.do_completion.help = [
     'Output bash completion code.',
     '',
-    'Installation:',
+    'To setup for playing:',
+    '    alias conan="node examples/conan.js"',
     '    {{name}} completion > /usr/local/etc/bash_completion.d/{{name}}',
+    '    source /usr/local/etc/bash_completion.d/{{name}}',
     '',
-    'Alternative installation:',
-    '    {{name}} completion > ~/.{{name}}.completion',
-    '    echo "source ~/.{{name}}.completion" >> ~/.bashrc',
-    '',
-    '{{options}}'
+    'To play:',
+    '    conan <TAB>',
+    '    conan crush -w <TAB>',
+    '    conan crush -w spear <TAB>'
 ].join('\n');
-
 Conan.prototype.do_completion.hidden = true;
-
 Conan.prototype.do_completion.options = [
     {
         names: ['help', 'h'],

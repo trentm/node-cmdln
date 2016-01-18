@@ -146,9 +146,15 @@ and get users to use that to setup Bash completion:
     $ alias conan="node examples/conan.js"
     $ conan completion > conan.completion
     $ source conan.completion
+
     $ conan <TAB>
-    --help      --version   -v          completion  hear        see
-    --verbose   -h          -x          crush       help        smash
+    crush      hear       help       pulverize  see        smash
+    $ conan -<TAB>
+    --help     --verbose  --version  -h         -v         -x
+    $ conan crush --weapon <TAB>            # custom 'weapon' completion type
+    bow-and-array  mattock        spear          sword
+    $ conan crush --weapon spear <TAB>      # custom 'enemy' completion type
+    King-Osric    Subotai       Thulsa-Doom   _mbsetupuser  trentm
 
 See the `do_completion` subcommand on "examples/conan.js" for a complete example
 of this.
@@ -232,6 +238,15 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
 
 - `CLI.prototype.do_<subcmd>.allowUnknownOptions = <boolean>;` Set to
   true to have `tool <subcmd> ...` allow unknown options.
+
+- `CLI.prototype.do_<subcmd>.completionArgtypes = <array>;` Set to an array
+  of strings to define the [Bash completion](#bash-completion) type for the
+  corresponding positional arg. For example, the following:
+        MyCLI.prototype.do_foo.completionTypes = ['fruit', 'file'];
+  would mean that `mycli foo <TAB>` would complete "fruit" (using a
+  `complete_fruit` bash function, typically provided via the `specExtra`
+  arg to `<cli>.bashCompletion()`) and the second and subsequent positional
+  args -- `mycli foo banana <TAB>` -- would use filename completion.
 
 - `CLI.prototype.init(opts, args, cb)` Hook run after option processing
   (`this.opts` is set), but before the subcommand handler is run.

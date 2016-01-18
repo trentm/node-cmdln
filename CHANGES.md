@@ -2,7 +2,25 @@
 
 ## 3.5.3 (not yet released)
 
-(nothing yet)
+- Bash completion: Add `completionArgtypes`:
+        CLI.prototype.do_<subcmd>.completionArgtypes = <array>;`
+  to be able to define custom completion types for positional args.
+
+  Also update to dashdash 1.12.2 for bash completion improvements. Of note,
+  this changes so that `mytool <TAB>` does *not* offer options as completions,
+  `mytool -<TAB>` does. See [dashdash's
+  changelog](https://github.com/trentm/node-dashdash/blob/master/CHANGES.md#1122).
+
+  See "examples/conan.js" for an example:
+
+        $ alias conan="node examples/conan.js"
+        $ conan completion > /usr/local/etc/bash_completion.d/conan
+        $ source /usr/local/etc/bash_completion.d/conan
+
+        $ conan crush --weapon
+        bow-and-array  mattock        spear          sword
+        $ conan crush --weapon spear
+        King-Osric    Subotai       Thulsa-Doom   _mbsetupuser  trentm
 
 
 ## 3.5.2
