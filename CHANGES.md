@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.5.3 (not yet released)
+## 3.5.3
 
 - Bash completion: Add `completionArgtypes`:
         CLI.prototype.do_<subcmd>.completionArgtypes = <array>;`
