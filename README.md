@@ -157,7 +157,8 @@ and get users to use that to setup Bash completion:
     King-Osric    Subotai       Thulsa-Doom   _mbsetupuser  trentm
 
 See the `do_completion` subcommand on "examples/conan.js" for a complete example
-of this.
+of this. See the equivalent in the larger `triton` tool for another example:
+<https://github.com/joyent/node-triton/blob/master/lib/do_completion.js>.
 
 Another potential usage could be to pre-generate a completion file and
 distribute it with your tool.
