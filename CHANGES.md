@@ -2,7 +2,8 @@
 
 ## 3.5.4 (not yet released)
 
-(nothing yet)
+- Bump dashdash dep version to get bash completion fix in
+  trentm/node-dashdash#20.
 
 
 ## 3.5.3
