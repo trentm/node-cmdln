@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 3.5.5 (not yet released)
+
+(nothing yet)
+
+
 ## 3.5.4
 
 - Bump dashdash dep version to get bash completion fix in
