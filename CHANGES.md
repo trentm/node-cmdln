@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 3.5.4 (not yet released)
+## 3.5.4
 
 - Bump dashdash dep version to get bash completion fix in
   trentm/node-dashdash#20.
