@@ -1,8 +1,12 @@
 # node-cmdln Changelog
 
-## 3.5.5 (not yet released)
+## 4.0.0 (not yet released)
 
-(nothing yet)
+- errHelp
+- cmdln.main err context and drop returning 'subcmd' here
+- XXX -> _cmdlnStack object
+- XXX drop '{{cmd}}' template var?
+- XXX TODO: drop 'subcmd' back from fini as well? I don't see it as useful.
 
 
 ## 3.5.4

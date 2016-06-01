@@ -440,7 +440,7 @@ var cases = [
         cmd: 'subsubcmd.js -v sub bleep -s',
         expect: {
             code: 1,
-            stderr: /^top sub: error: unknown option: "-s"\s+/
+            stderr: /^top sub bleep: error: unknown option: "-s"\s+/
         }
     },
     {
@@ -492,7 +492,59 @@ var cases = [
                 /^Usage: cmd-template-var awesome .../m,
             ]
         }
-    }
+    },
+
+    // Test synopses and errHelp.
+    {
+        cmd: 'synopses-and-errhelp.js',
+        expect: {
+            code: 1,
+            stdout: [
+                /^Usage:/m,
+                /^    synopses-and-errhelp \[OPTIONS/m,
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js help a',
+        expect: {
+            code: 0,
+            stdout: [
+                /^Usage:/m,
+                /^    synopses-and-errhelp a \[OPTIONS\] arg1 arg2$/m,
+                /^    synopses-and-errhelp a --list-foo$/m,
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js a --bogus # OptionError',
+        expect: {
+            code: 1,
+            stderr: [
+                /* BEGIN JSSTYLED */
+                /^synopses-and-errhelp a: error: unknown option: "--bogus"$/m,
+                /^usage: synopses-and-errhelp a \[ --help \| -h \] \[ --file=FILE \| -f FILE \]$/m,
+                /^    \[ --list-foo \] \.\.\.$/m
+                /* END JSSTYLED */
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js a # UsageError',
+        expect: {
+            code: 1,
+            stderr: [
+                /* BEGIN JSSTYLED */
+                /^synopses-and-errhelp a: error: incorrect number of args$/m,
+                /^usage:/m,
+                /^    synopses-and-errhelp a \[OPTIONS\] arg1 arg2$/m,
+                /^    synopses-and-errhelp a --list-foo$/m,
+                /* END JSSTYLED */
+            ]
+        }
+    },
+
+
 
 ];
 
