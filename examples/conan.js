@@ -73,15 +73,15 @@ Conan.prototype.do_crush.options = [
         help: 'Weapon with which to smite.'
     }
 ];
+Conan.prototype.do_crush.synopses = ['{{name}} {{cmd}} [OPTIONS] [ENEMIES...]'];
+Conan.prototype.do_crush.help = [
+    'Crush your enemies.',
+    '',
+    '{{usage}}',
+    '',
+    '{{options}}'
+].join('\n');
 Conan.prototype.do_crush.completionArgtypes = ['enemy'];
-Conan.prototype.do_crush.help = (
-    'Crush your enemies.\n'
-    + '\n'
-    + 'Usage:\n'
-    + '     {{name}} {{cmd}} [OPTIONS] [ENEMIES...]\n'
-    + '\n'
-    + '{{options}}'
-);
 
 Conan.prototype.do_completion = function (subcmd, opts, args, callback) {
     if (opts.help) {
@@ -138,14 +138,14 @@ Conan.prototype.do_see = function (subcmd, opts, args, callback) {
     }
     callback();
 };
-Conan.prototype.do_see.help = (
-    'See them driven before you.\n'
-    + '\n'
-    + 'Usage:\n'
-    + '     {{name}} {{cmd}} [OPTIONS] [ENEMIES...]\n'
-    + '\n'
-    + '{{options}}'
-);
+Conan.prototype.do_see.synopses = ['{{name}} {{cmd}} [OPTIONS] [ENEMIES...]'];
+Conan.prototype.do_see.help = [
+    'See them driven before you.',
+    '',
+    '{{usage}}',
+    '',
+    '{{options}}'
+].join('\n');
 Conan.prototype.do_see.options = [
     {name: 'x', type: 'bool', help: 'Be more excited about it.'}
 ];

@@ -1,3 +1,13 @@
+# errHelp
+
+- triton: {{usage}} and synopses
+- XXXs from node-triton/lib/cli.js
+- follow up ticket for '-E' or something:
+  * - a concern with following errHelp output is that you cannot use the last
+  *   lines for parsing error output. Want a `triton -E` or similar (see
+  *   imgadm optionfor this) for parsable JSON last error line.
+
+
 # bash completion
 
 Some thoughts. See `npm completion` for some inspiration.

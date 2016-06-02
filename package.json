@@ -13,13 +13,13 @@
     "keywords": ["cmdln", "cli", "tool", "bash", "completion"],
 
     "dependencies": {
-        "assert-plus": "^0.2.0",
+        "assert-plus": "^1.0.0",
         "extsprintf": "^1.2.0",
         "verror": "^1.6.0",
-        "dashdash": "^1.13.1",
+        "dashdash": "^1.14.0",
         "fuzzyset.js": "^0.0.1"
     },
     "devDependencies": {
-        "nodeunit": "0.9.0"
+        "nodeunit": "^0.9.0"
     }
 }
