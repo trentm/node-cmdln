@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 4.0.0 (not yet released)
+## 4.0.0
 
 - [Backward incompatible change] The signature of the callback from
   `<cmdln instance>.main(argv, callback)` changed from:
