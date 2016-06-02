@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 4.0.1 (not yet released)
+
+(nothing yet)
+
+
 ## 4.0.0
 
 - [Backward incompatible change] The signature of the callback from
