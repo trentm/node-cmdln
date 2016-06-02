@@ -40,7 +40,9 @@
   (e.g. the SYNOPSIS section of a typical man page). There are a few changes in
   this module that make it easy for your tools to get these kinds of error help.
 
-  See the "errHelp and Errors" section of the README for how to use this.
+  See [the "errHelp and Errors" section of the
+  README](https://github.com/trentm/node-cmdln#errhelp-and-errors) for how to
+  use this.
 
 
 ## 3.5.4
