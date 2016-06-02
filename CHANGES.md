@@ -1,8 +1,48 @@
 # node-cmdln Changelog
 
-## 3.5.5 (not yet released)
+## 4.0.0 (not yet released)
 
-(nothing yet)
+- [Backward incompatible change] The signature of the callback from
+  `<cmdln instance>.main(argv, callback)` changed from:
+        function (err, subcmd)          # old
+  to:
+        function (err)                  # new in v4
+  The `subcmd` value was not always set and, when nested Cmdln instances were
+  used (e.g. a multi-subcmd tool, `triton instance list ...`), the `subcmd`
+  value was unhelpfully only the last one (`list` in the example). Instead,
+  the `err` object (if there was an error) is assigned some cmdln state to
+  assist with getting error details. Read on.
+
+- When `err` is returned from `<cmdln instance>.main()`'s callback, it now
+  has properties (private props prefixed with `_cmdln`) that identify on what
+  cmdln handler the error occurred. Two new functions can work with this info:
+
+  - `cmdln.nameFromErr(err)` will give the full command name to where the
+    error occurred (e.g. "triton instance list" in the example above).
+  - `cmdln.errHelpFromErr(err)` will attempt to construct an appropriate
+    "errHelp" string for the error. Read on.
+
+- The concepts of command **`synopses` and `errHelp`** have been added to this
+  module. `errHelp` is a brief message after a printed error, giving potentially
+  helpful info. Some examples from familiar commands (marked here with `>`):
+
+            $ ls -D
+            ls: illegal option -- D
+        >   usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]
+
+            $ git foo
+            git: 'foo' is not a git command. See 'git --help'.
+
+        >   Did you mean this?
+        >          fo
+
+  `synopses` are short usage statements that outline how to call a command
+  (e.g. the SYNOPSIS section of a typical man page). There are a few changes in
+  this module that make it easy for your tools to get these kinds of error help.
+
+  See [the "errHelp and Errors" section of the
+  README](https://github.com/trentm/node-cmdln#errhelp-and-errors) for how to
+  use this.
 
 
 ## 3.5.4

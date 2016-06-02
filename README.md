@@ -166,8 +166,8 @@ distribute it with your tool.
 
 # Reference
 
-In general, please read the comments in [the source](./lib/cmdln.js) and
-[browse the examples](./examples/). The API is far from fully documented here.
+In general, also please read the comments in [the source](./lib/cmdln.js) and
+[browse the examples](./examples/).
 
 ## `cmdln.Cmdln`
 
@@ -210,6 +210,17 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   (in [dashdash](https://github.com/trentm/node-dashdash) format) for that
   subcommand.
 
+- `CLI.prototype.do_<subcmd>.synopses = <array of strings>;`
+  Set to the synopsis string(s) for this command, i.e. the part typically
+  in the "SYNOPSIS" section of a man page. See
+  [examples/conan.js](examples/conan.js). This supports some template variables:
+
+    - `{{name}}` becomes `cli.name` (i.e. the tool name).
+    - `{{cmd}}` becomes the sub-command name.
+
+  Setting `synopses` can be used (a) for the `{{usage}}` template var in
+  subcmd help (see below) and (b) for `errHelp` for `UsageError`s (see below).
+
 - `CLI.prototype.do_<subcmd>.helpOpts = <dashdash helpOpts object>;` to override
   formatting settings for `options` help output for this command. By default
   the `helpOpts` passed into the CLI constructor are used. The set of supported
@@ -221,6 +232,10 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
 
     - `{{name}}` becomes `cli.name` (i.e. the tool name).
     - `{{cmd}}` becomes the sub-command name.
+    - `{{usage}}` becomes a "Usage:\n   $synopses" block if `synopses` are
+      defined (see above).
+    - `{{options}}` becomes a "Options:\n    $option-help" block if `options`
+      are provided for the subcmd (see above).
 
 - `CLI.prototype.do_<subcmd>.help = function (subcmd, opts, args, cb)` is
   an alternate method to handle help for a subcommand. The given function
@@ -243,7 +258,7 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
 - `CLI.prototype.do_<subcmd>.completionArgtypes = <array>;` Set to an array
   of strings to define the [Bash completion](#bash-completion) type for the
   corresponding positional arg. For example, the following:
-        MyCLI.prototype.do_foo.completionTypes = ['fruit', 'file'];
+        MyCLI.prototype.do_foo.completionArgtypes = ['fruit', 'file'];
   would mean that `mycli foo <TAB>` would complete "fruit" (using a
   `complete_fruit` bash function, typically provided via the `specExtra`
   arg to `<cli>.bashCompletion()`) and the second and subsequent positional
@@ -266,22 +281,9 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   (Note: The call signature to `fini` changed in cmdln v3. See the changelog
   in CHANGES.md.)
 
-- [Backward incompatible change] Change the signature of a `<cmdln>.fini` method
-  from:
-
-        MyCLI.prototype.fini = function fini(subcmd, cb) {
-
-  to:
-
-        MyCLI.prototype.fini = function fini(subcmd, err, cb) {
-
-  where `err` is the error returned by the invocation of the CLI. This allows
-  a `fini` method to use or deal with that error, if necessary.
-
 - `cli.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
-  print a full stack on a shown error. When wanted, this is typically set
-  in If you want this option it is typically
-  set either
+  print a full stack on a shown error. A common pattern of mine is to set
+  this in the `.init()` method if a top-level `-v,--verbose` option is given.
 
 - `cli.handlerFromSubcmd(<subcmd>)` will return the appropriate
   `do_<subcmd>` method that handles the given sub-command. This resolves
@@ -301,6 +303,68 @@ This is a convenience method for driving the mainline of your script using
 the your defined `Cmdln` subclass. There are a number of options to control
 how it works. Read the block comment on that function in "lib/cmdln.js" for
 the best docs.
+
+## `errHelp` and Errors
+
+cmdln v4 introduced subcmd *synopses*, *`errHelp`*, and some related
+functionality to help provide brief automatic command help for some usage
+errors. `errHelp` is a brief message after a printed error, giving potentially
+helpful info. Some examples from familiar commands (marked here with `>`):
+
+        $ ls -D
+        ls: illegal option -- D
+    >   usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]
+
+        $ git foo
+        git: 'foo' is not a git command. See 'git --help'.
+
+    >   Did you mean this?
+    >          fo
+
+Use the following suggestions to get this kind of error-help for your commands:
+
+1. Optionally set `synopses` on your subcmd handlers. E.g.:
+
+        do_list.synopses = ['{{name}} list [OPTIONS] FILTERS...'];
+
+   Doing so allows two things: (a) the use of the `{{usage}}` template var
+   in your command help, and (b) use of those synopses for `errHelp`.
+
+2. Optionally use the `{{usage}}` template var in your command help. E.g.:
+
+        do_list.help = [
+            'List instances.',
+            '',
+            '{{usage}}',
+            '',
+            '{{options}}'
+        ].join('\n');
+
+3. Optionally use the `cmdln.UsageError` error class for usage errors in
+   your subcmds. E.g.:
+
+        function do_list(subcmd, opts, args, callback) {
+            // ...
+            } else if (args.length < 1) {
+                callback(new cmdln.UsageError('missing FILTER args'));
+                return;
+            }
+
+4. Use `cmdln.main()` for your mainline
+
+   This will now attempt to determine `errHelp` from any returned error and
+   print it on stderr -- use `options.showErrHelp=false` to disable. Or if
+   you are not using `cmdln.main()`, then you can use
+   `cmdln.errHelpFromErr(err)` to get errHelp to print, if you like.
+
+Error help is determined by calling `err.cmdlnErrHelpFromErr()`, which is
+implemented for cmdln's error classes:
+
+- `cmdln.OptionError`: Show a synopsis of the command's options.
+- `cmdln.UsageError`: Show the command's synopses, if available.
+- `cmdln.UnknownCommandError`: List possible fuzzy matches.
+
+You can implement that method for custom error classes if you like.
 
 
 ## `cmdln.dashdash`

@@ -440,7 +440,7 @@ var cases = [
         cmd: 'subsubcmd.js -v sub bleep -s',
         expect: {
             code: 1,
-            stderr: /^top sub: error: unknown option: "-s"\s+/
+            stderr: /^top sub bleep: error: unknown option: "-s"\s+/
         }
     },
     {
@@ -492,8 +492,70 @@ var cases = [
                 /^Usage: cmd-template-var awesome .../m,
             ]
         }
-    }
+    },
 
+    // Test synopses and errHelp.
+    {
+        cmd: 'synopses-and-errhelp.js',
+        expect: {
+            code: 1,
+            stdout: [
+                /^Usage:/m,
+                /^    synopses-and-errhelp \[OPTIONS/m,
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js help abc',
+        expect: {
+            code: 0,
+            stdout: [
+                /^Usage:/m,
+                /^    synopses-and-errhelp abc \[OPTIONS\] arg1 arg2$/m,
+                /^    synopses-and-errhelp abc --list-foo$/m,
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js abc --bogus # OptionError',
+        expect: {
+            code: 1,
+            stderr: [
+                /* BEGIN JSSTYLED */
+                /^synopses-and-errhelp abc: error: unknown option: "--bogus"$/m,
+                /^usage: synopses-and-errhelp abc \[ --help \| -h \] \[ --file=FILE \| -f FILE \]$/m,
+                /^    \[ --list-foo \] \.\.\.$/m
+                /* END JSSTYLED */
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js abc # UsageError',
+        expect: {
+            code: 1,
+            stderr: [
+                /* BEGIN JSSTYLED */
+                /^synopses-and-errhelp abc: error: incorrect number of args$/m,
+                /^usage:/m,
+                /^    synopses-and-errhelp abc \[OPTIONS\] arg1 arg2$/m,
+                /^    synopses-and-errhelp abc --list-foo$/m,
+                /* END JSSTYLED */
+            ]
+        }
+    },
+    {
+        cmd: 'synopses-and-errhelp.js abd # UnknownCommandError',
+        expect: {
+            code: 1,
+            stderr: [
+                /* BEGIN JSSTYLED */
+                /* END JSSTYLED */
+                /^synopses-and-errhelp: error: unknown command: "abd"$/m,
+                /^Did you mean this?/m,
+                /^    abc$/m,
+            ]
+        }
+    }
 ];
 
 cases.forEach(function (c, i) {
