@@ -6,6 +6,11 @@
   * - a concern with following errHelp output is that you cannot use the last
   *   lines for parsing error output. Want a `triton -E` or similar (see
   *   imgadm optionfor this) for parsable JSON last error line.
+  Some fields that might be nice to have on this summary line:
+      argv: original argv
+      err: if there was an error, details here: message, code, stack
+      exitStatus
+      elapsedS
 
 
 # bash completion

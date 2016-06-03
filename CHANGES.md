@@ -1,8 +1,27 @@
 # node-cmdln Changelog
 
-## 4.0.1 (not yet released)
+## 4.1.0 (not yet released)
 
-(nothing yet)
+- [Potentially backward incompatible change] Change `cmdln.main()` behaviour on
+  complete to attempt to "soft exit", by which I mean attempt to avoid calling
+  `process.exit(code)`, because with node.js that means std handles won't
+  necessarily be flushed before process exit. Starting in node.js 0.12
+  `process.exitCode` was added to set the exit code without the hard exit.
+
+  Warning: A side-effect of avoiding `process.exit()` is that apps using
+  `cmdln.main()` that have active handles open will now *hang* instead
+  of exiting. To get the old behaviour, use:
+
+        cmdln.main(cli, {finale: 'exit'});
+
+- [issue #11] Add `finale` and `callback` options to `cmdln.main(<cli>,
+  <options>)`.  `finale` defines what to do when done.  Valid values are:
+
+  - softexit (the default): set `process.exitCode` if supported, else call
+    `process.exit()`
+  - exit: call `process.exit()` which can result in std handles not being flushed
+  - callback: call the given `options.callback`
+  - none: Do nothing
 
 
 ## 4.0.0
