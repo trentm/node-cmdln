@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 4.1.1 (not yet released)
+
+(nothing yet)
+
+
 ## 4.1.0
 
 - [Potentially backward incompatible change] Change `cmdln.main()` behaviour on
