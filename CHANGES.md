@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 4.1.0 (not yet released)
+## 4.1.0
 
 - [Potentially backward incompatible change] Change `cmdln.main()` behaviour on
   complete to attempt to "soft exit", by which I mean attempt to avoid calling
