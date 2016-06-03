@@ -11,6 +11,7 @@
     },
     "engines": ["node >=0.8.0"],
     "keywords": ["cmdln", "cli", "tool", "bash", "completion"],
+    "license": "MIT",
 
     "dependencies": {
         "assert-plus": "^1.0.0",
