@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 4.1.1 (not yet released)
+## 4.1.1
 
 - `errHelp` fix: If the handler function for a subcmd didn't have a `<func>.name`
   (i.e. it was anonymous), e.g. the former in:
