@@ -2,7 +2,15 @@
 
 ## 4.1.1 (not yet released)
 
-(nothing yet)
+- `errHelp` fix: If the handler function for a subcmd didn't have a `<func>.name`
+  (i.e. it was anonymous), e.g. the former in:
+
+        MyCli.prototype.do_foo = function (subcmd, opts, args, cb) {};  # anon
+        MyCli.prototype.do_foo = function do_foo(subcmd, opts, args, cb) {};
+
+  then `UsageError.cmdlnErrHelpFromErr` would not correctly determine the
+  subcmd name for interpolation of a `{{cmd}}` template var in the handlers
+  `synopses`. Fix that.
 
 
 ## 4.1.0
