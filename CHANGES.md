@@ -1,5 +1,10 @@
 # node-cmdln Changelog
 
+## 4.1.2 (not yet released)
+
+(nothing yet)
+
+
 ## 4.1.1
 
 - `errHelp` fix: If the handler function for a subcmd didn't have a `<func>.name`
