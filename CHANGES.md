@@ -4,6 +4,11 @@
 
 (nothing yet)
 
+## 4.1.2
+
+- [trentm/node-dashdash#30] Change the output used by Bash completion support to
+  indicate "there are no completions for this argument" to cope with different
+  sorting rules on different Bash/platforms.
 
 ## 4.1.1
 
