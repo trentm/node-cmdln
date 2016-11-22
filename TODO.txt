@@ -1,7 +1,13 @@
+# from triton
+
+- The 'shortcut' commands use `handlerFromSubcmd(...).dispatch`. That
+  doesn't run the subcmd class's `.init()` method. node-cmdln should provide
+  a way to do this. ... basically want to call the *main()* but with preparsed
+  options. Perhaps the init/fini should move into dispatch?
+
+
 # errHelp
 
-- triton: {{usage}} and synopses
-- XXXs from node-triton/lib/cli.js
 - follow up ticket for '-E' or something:
   * - a concern with following errHelp output is that you cannot use the last
   *   lines for parsing error output. Want a `triton -E` or similar (see

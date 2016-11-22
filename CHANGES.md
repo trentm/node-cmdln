@@ -1,6 +1,6 @@
 # node-cmdln Changelog
 
-## 4.1.2 (not yet released)
+## not yet released
 
 (nothing yet)
 
