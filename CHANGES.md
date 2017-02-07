@@ -5,8 +5,8 @@
 ## 4.2.0
 
 - Expose the `includeHidden` option to `Cmdln#bashCompletion()`. It is passed
-  through to `Cmdln#bashCompletionSpec()`.
-(nothing yet)
+  through to `Cmdln#bashCompletionSpec()`. Also correct a bug where
+  `includeHidden` did not propagate to nested subcommands.
 
 ## 4.1.2
 
