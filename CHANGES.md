@@ -2,6 +2,10 @@
 
 ## not yet released
 
+## 4.2.0
+
+- Expose the `includeHidden` option to `Cmdln#bashCompletion()`. It is passed
+  through to `Cmdln#bashCompletionSpec()`.
 (nothing yet)
 
 ## 4.1.2
@@ -189,7 +193,7 @@
 
 ## 3.3.0
 
-- `<MyCLI instance>.bashCompletions()` will generate bash completions
+- `<MyCLI instance>.bashCompletion()` will generate bash completions
   for the `MyCLI` tool. You can add, e.g., a 'completion(s)' command
   to your CLI for users to run. Or you could generate completions
   and distribute those with your tool.
