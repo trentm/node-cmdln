@@ -2,6 +2,11 @@
 
 ## not yet released
 
+## 4.2.1
+
+- It turns out specifying a `finale` option to `cmdln.main(CLI, OPTIONS)` never
+  worked. Fix that.
+
 ## 4.2.0
 
 - Expose the `includeHidden` option to `Cmdln#bashCompletion()`. It is passed
@@ -44,11 +49,14 @@
 - [issue #11] Add `finale` and `callback` options to `cmdln.main(<cli>,
   <options>)`.  `finale` defines what to do when done.  Valid values are:
 
-  - softexit (the default): set `process.exitCode` if supported, else call
-    `process.exit()`
-  - exit: call `process.exit()` which can result in std handles not being flushed
-  - callback: call the given `options.callback`
-  - none: Do nothing
+  - "softexit" (the default): set `process.exitCode` if the node.js version
+    supports it (node v0.12 and above do), else call `process.exit()`. Note
+    the warning above that a process with open handles (e.g. a setTimeout)
+    will *hang*.
+  - "exit": call `process.exit()` which can result in std handles not being
+    flushed
+  - "callback": call the given `options.callback`
+  - "none": Do nothing
 
 
 ## 4.0.0

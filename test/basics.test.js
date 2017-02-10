@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Trent Mick. All rights reserved.
+ * Copyright 2017 Trent Mick
  *
  * node-cmdln tests
  */
@@ -554,6 +554,14 @@ var cases = [
                 /^Did you mean this?/m,
                 /^    abc$/m,
             ]
+        }
+    },
+
+    // finale
+    {
+        cmd: 'needs-hard-exit.js -h  # finale=exit',
+        expect: {
+            code: 0
         }
     }
 ];
