@@ -281,6 +281,28 @@ We'll use the `CLI` and `cli` names as used above in the following reference:
   (Note: The call signature to `fini` changed in cmdln v3. See the changelog
   in CHANGES.md.)
 
+- `CLI.prototype.defaultHandler(subcmd, opts, args, cb)` This is a hook
+  function to handle an unknown option. By default it will callback with
+  `UnknownCommandError(subcmd)`. It can be overriden, for example as
+  follows:
+
+		/*
+		 * Provide the `jirash KEY-1` shortcut for `jirash issue get KEY-1`.
+		 */
+		JirashCli.prototype.defaultHandler = function defaultHandler(
+				subcmd, opts, args, cb) {
+			var keyRe = /^[A-Z]+-\d+$/;
+			if (keyRe.test(subcmd)) {
+				this.handlerFromSubcmd('issue').dispatch({
+					subcmd: 'get',
+					opts: {'short': true},
+					args: [subcmd]
+				}, cb);
+			} else {
+				Cmdln.prototype.defaultHandler.call(this, subcmd, opts, args, cb);
+			}
+		};
+
 - `cli.showErrStack` boolean. Set to true to have `cmdln.main()`, if used,
   print a full stack on a shown error. A common pattern of mine is to set
   this in the `.init()` method if a top-level `-v,--verbose` option is given.

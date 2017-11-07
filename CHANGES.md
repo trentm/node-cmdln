@@ -2,6 +2,14 @@
 
 ## not yet released
 
+(nothing yet)
+
+## 4.3.0
+
+- Add a new `CLI.prototype.defaultHandler = function (subcmd, opts, args, cb)`
+  hook that can be used for custom handling of giving an unknown sub-command
+  name.
+
 ## 4.2.1
 
 - It turns out specifying a `finale` option to `cmdln.main(CLI, OPTIONS)` never
