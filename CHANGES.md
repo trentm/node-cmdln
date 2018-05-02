@@ -4,6 +4,12 @@
 
 (nothing yet)
 
+## 4.3.1
+
+- Fix `CLI.prototype.defaultHandler` to pass through `args`.  Before this
+  change `opts` and `args` were undefined. After the change they are
+  `opts = {}` and `args` is the array of arguments after the subcmd.`
+
 ## 4.3.0
 
 - Add a new `CLI.prototype.defaultHandler = function (subcmd, opts, args, cb)`
