@@ -4,6 +4,18 @@
 
 (nothing yet)
 
+## 4.4.0
+
+- [#18] Improve printing of error details in `cmdln.main()`. Specifically:
+
+    - If the err is a `verror.MultiError`, then print all of collected errors'
+      messages.
+    - With `showErrStack` use `VError.fullStack()` to print the full cause
+      chain.
+    - With `showErrStack` print `VError.info()` if there is any.
+
+  See [issue #18] for examples.
+
 ## 4.3.1
 
 - Fix `CLI.prototype.defaultHandler` to pass through `args`.  Before this
