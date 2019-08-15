@@ -4,15 +4,21 @@
     "description": "helper lib for creating CLI tools with subcommands; think `git`, `svn`, `zfs`",
     "author": "Trent Mick (http://trentm.com)",
     "main": "./lib/cmdln.js",
-
     "repository": {
         "type": "git",
         "url": "git://github.com/trentm/node-cmdln.git"
     },
-    "engines": ["node >=0.8.0"],
-    "keywords": ["cmdln", "cli", "tool", "bash", "completion"],
+    "engines": [
+        "node >=0.10.0"
+    ],
+    "keywords": [
+        "cmdln",
+        "cli",
+        "tool",
+        "bash",
+        "completion"
+    ],
     "license": "MIT",
-
     "dependencies": {
         "assert-plus": "^1.0.0",
         "extsprintf": "^1.2.0",
@@ -21,6 +27,6 @@
         "fuzzyset.js": "^0.0.1"
     },
     "devDependencies": {
-        "nodeunit": "^0.9.0"
+        "tap": "^12.7.0"
     }
 }

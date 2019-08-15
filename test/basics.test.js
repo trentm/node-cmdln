@@ -1,8 +1,17 @@
+
 /*
- * Copyright 2017 Trent Mick
- *
- * node-cmdln tests
+ * Basic node-cmdln tests.
  */
+
+var path = require('path');
+var format = require('util').format;
+var exec = require('child_process').exec;
+var test = require('tap').test;
+
+var cmdln = require('../lib/cmdln');
+
+
+// ---- globals and constants
 
 var DEBUG = false;
 if (DEBUG) {
@@ -10,21 +19,6 @@ if (DEBUG) {
 } else {
     var debug = function () {};
 }
-
-var path = require('path');
-var format = require('util').format;
-var exec = require('child_process').exec;
-
-
-// node-tap API
-if (require.cache[__dirname + '/tap4nodeunit.js'])
-    delete require.cache[__dirname + '/tap4nodeunit.js'];
-var tap4nodeunit = require('./tap4nodeunit.js');
-var after = tap4nodeunit.after;
-var before = tap4nodeunit.before;
-var test = tap4nodeunit.test;
-
-var cmdln = require('../lib/cmdln');
 
 
 // ---- internal support stuff
@@ -41,10 +35,6 @@ function objCopy(obj, target) {
 
 
 // ---- tests
-
-before(function (next) {
-    next();
-});
 
 test('exports', function (t) {
     t.ok(cmdln.Cmdln, 'cmdln.Cmdln');
@@ -605,9 +595,8 @@ cases.forEach(function (c, i) {
             if (expect.err) {
                 t.ok(err, 'err');
                 if (expect.err instanceof RegExp) {
-                    t.ok(expect.err.test(err.message),
-                        format('err.message does not match %s: "%s"',
-                            expect.err, err.message));
+                    t.match(err.message, expect.err,
+                        'err.message should match ' + expect.err);
                 }
             }
             if (expect.code !== undefined) {
@@ -625,8 +614,7 @@ cases.forEach(function (c, i) {
                     if (typeof(pat) === 'string') {
                         pat = new RegExp(pat);
                     }
-                    t.ok(pat.test(stdout), format(
-                        'stdout does not match %s: "%s"', pat, stdout));
+                    t.match(stdout, pat, 'stdout should match ' + pat);
                 });
             }
             if (expect.notStdout) {
@@ -636,8 +624,7 @@ cases.forEach(function (c, i) {
                     if (typeof(pat) === 'string') {
                         pat = new RegExp(pat);
                     }
-                    t.ok(!pat.test(stdout), format('stdout matches %s: %s',
-                        pat, stdout));
+                    t.notMatch(stdout, pat, 'stdout should not match ' + pat);
                 });
             }
             if (expect.stderr) {
@@ -647,8 +634,7 @@ cases.forEach(function (c, i) {
                     if (typeof(pat) === 'string') {
                         pat = new RegExp(pat);
                     }
-                    t.ok(pat.test(stderr), format('stderr does not match %s: %s',
-                        pat, stderr));
+                    t.match(stderr, pat, 'stderr should match ' + pat);
                 });
             }
             t.done();

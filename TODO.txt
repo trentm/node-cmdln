@@ -46,5 +46,4 @@ Some thoughts. See `npm completion` for some inspiration.
 
 # someday/maybe
 
-- bash completion generation support
 - interactive shell (a la cmdln.py)
