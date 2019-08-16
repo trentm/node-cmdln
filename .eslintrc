@@ -20,6 +20,6 @@
     },
     "rules": {
         "curly": ["error", "all"],
-//        "func-names": ["error", "always"]
+        "func-names": ["error", "always"]
     }
 }
