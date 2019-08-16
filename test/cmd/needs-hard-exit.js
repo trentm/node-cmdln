@@ -3,7 +3,6 @@
  * A CLI to test out using `finale` option to `cmdln.main()`.
  */
 
-var p = console.log;
 var util = require('util');
 var cmdln = require('../../lib/cmdln');
 
@@ -11,7 +10,7 @@ var cmdln = require('../../lib/cmdln');
  * An active handle that will keep a node process alive, unless you call
  * `process.exit()`.
  */
-var interval = setInterval(function() {
+setInterval(function in30s() {
     console.error('needs-hard-exit.js: interval still running');
 }, 30000);
 

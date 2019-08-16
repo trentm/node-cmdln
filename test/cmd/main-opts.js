@@ -3,7 +3,6 @@
  * A CLI to test out `cmdln.main()` opts.
  */
 
-var p = console.log;
 var util = require('util');
 var cmdln = require('../../lib/cmdln');
 
@@ -22,7 +21,7 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.init = function(opts, args, callback) {
+CLI.prototype.init = function init(opts, _args, _callback) {
     if (opts.verbose) {
         this.showErrStack = true;
     }

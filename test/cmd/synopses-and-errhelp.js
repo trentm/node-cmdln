@@ -3,7 +3,6 @@
  * A CLI to test `synopses` and `errHelp`.
  */
 
-var p = console.log;
 var util = require('util');
 var cmdln = require('../../lib/cmdln');
 
@@ -15,11 +14,11 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.do_abc = function(subcmd, opts, args, cb) {
+CLI.prototype.do_abc = function do_abc(subcmd, opts, args, cb) {
     if (opts.help) {
         this.do_help('help', {}, [subcmd], cb);
         return;
-    } else if (args.length != 2) {
+    } else if (args.length !== 2) {
         cb(new cmdln.UsageError('incorrect number of args'));
         return;
     }

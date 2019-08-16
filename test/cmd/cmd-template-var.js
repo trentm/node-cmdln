@@ -3,7 +3,6 @@
  * A test CLI to test the '{{cmd}}' help template var.
  */
 
-var p = console.log;
 var util = require('util');
 var cmdln = require('../../lib/cmdln');
 
@@ -15,13 +14,13 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.do_awesome = function(subcmd, opts, args, cb) {
+CLI.prototype.do_awesome = function do_awesome(_subcmd, _opts, _args, cb) {
     console.log('Do awesome.');
     cb();
 };
 CLI.prototype.do_awesome.help = 'Usage: {{name}} {{cmd}} ...';
 
-CLI.prototype.do_lame = function(subcmd, opts, args, cb) {
+CLI.prototype.do_lame = function do_lame(_subcmd, _opts, _args, cb) {
     console.log('Do lame.');
     cb();
 };

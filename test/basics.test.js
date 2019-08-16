@@ -12,10 +12,11 @@ var cmdln = require('../lib/cmdln');
 // ---- globals and constants
 
 var DEBUG = false;
+var debug;
 if (DEBUG) {
-    var debug = console.warn;
+    debug = console.warn;
 } else {
-    var debug = function() {};
+    debug = function _internalDebug() {};
 }
 
 // ---- internal support stuff
@@ -24,7 +25,7 @@ function objCopy(obj, target) {
     if (!target) {
         target = {};
     }
-    Object.keys(obj).forEach(function(k) {
+    Object.keys(obj).forEach(function onKey(k) {
         target[k] = obj[k];
     });
     return target;
@@ -32,7 +33,7 @@ function objCopy(obj, target) {
 
 // ---- tests
 
-test('exports', function(t) {
+test('exports', function _(t) {
     t.ok(cmdln.Cmdln, 'cmdln.Cmdln');
     t.ok(cmdln.CmdlnError, 'cmdln.CmdlnError');
     t.ok(cmdln.OptionError, 'cmdln.OptionError');
@@ -41,7 +42,7 @@ test('exports', function(t) {
     t.end();
 });
 
-test('<error>.code', function(t) {
+test('<error>.code', function _(t) {
     var cause = new Error('boom');
     t.equal(new cmdln.OptionError(cause).code, 'Option');
     t.equal(new cmdln.UnknownCommandError('foo').code, 'UnknownCommand');
@@ -599,19 +600,19 @@ var cases = [
                 /^ {4}throw new assert.AssertionError\({$/m,
                 /^ {4}\^$/m,
                 /^AssertionError.*: cb \(func\) is required$/m,
-                /^ {4}at someHelperFunction \(.*\/programmer-error.js:15:12\).*$/m
+                /^ {4}at someHelperFunction \(.*\/programmer-error.js:14:12\).*$/m
             ]
         }
     }
 ];
 
-cases.forEach(function(c, i) {
+cases.forEach(function onCase(c, i) {
     var expect = c.expect;
     var cmd = c.cmd;
     var env = c.env;
     var envStr = '';
     if (env) {
-        Object.keys(env).forEach(function(e) {
+        Object.keys(env).forEach(function onEnvvar(e) {
             envStr += format('%s=%s ', e, env[e]);
         });
     }
@@ -629,7 +630,7 @@ cases.forEach(function(c, i) {
         return;
     }
 
-    test(name, function(t) {
+    test(name, function _(t) {
         debug('--');
         var opts = {
             cwd: path.resolve(__dirname, '..')
@@ -642,11 +643,14 @@ cases.forEach(function(c, i) {
             debug('env: %j', env);
             opts.env = objCopy(process.env, objCopy(env));
         }
-        exec(realCmd, opts, function(err, stdout, stderr) {
+        exec(realCmd, opts, function onExec(err, stdout, stderr) {
+            var pats;
+
             debug('err:', err);
             debug('code:', err && err.code);
             debug('stdout: "%s"', stdout);
             debug('stderr: "%s"', stderr);
+
             if (expect.err) {
                 t.ok(err, 'err');
                 if (expect.err instanceof RegExp) {
@@ -669,10 +673,10 @@ cases.forEach(function(c, i) {
                 t.ifError(err);
             }
             if (expect.stdout) {
-                var pats = Array.isArray(expect.stdout)
+                pats = Array.isArray(expect.stdout)
                     ? expect.stdout
                     : [expect.stdout];
-                pats.forEach(function(pat) {
+                pats.forEach(function onPat(pat) {
                     if (typeof pat === 'string') {
                         pat = new RegExp(pat);
                     }
@@ -680,10 +684,10 @@ cases.forEach(function(c, i) {
                 });
             }
             if (expect.notStdout) {
-                var pats = Array.isArray(expect.notStdout)
+                pats = Array.isArray(expect.notStdout)
                     ? expect.notStdout
                     : [expect.notStdout];
-                pats.forEach(function(pat) {
+                pats.forEach(function onPat(pat) {
                     if (typeof pat === 'string') {
                         pat = new RegExp(pat);
                     }
@@ -691,10 +695,10 @@ cases.forEach(function(c, i) {
                 });
             }
             if (expect.stderr) {
-                var pats = Array.isArray(expect.stderr)
+                pats = Array.isArray(expect.stderr)
                     ? expect.stderr
                     : [expect.stderr];
-                pats.forEach(function(pat) {
+                pats.forEach(function onPat(pat) {
                     if (typeof pat === 'string') {
                         pat = new RegExp(pat);
                     }

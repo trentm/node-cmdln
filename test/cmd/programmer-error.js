@@ -7,7 +7,6 @@
  */
 
 var assert = require('assert-plus');
-var p = console.log;
 var util = require('util');
 var cmdln = require('../../lib/cmdln');
 
@@ -23,21 +22,9 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.fini = function(subcmd, err, callback) {
-    p('ran fini:', subcmd);
-    callback();
-};
-
-CLI.prototype.do_hi = function(subcmd, opts, args, callback) {
+CLI.prototype.do_hi = function do_hi(_subcmd, _opts, _args, callback) {
     // This is a programmer error: forgot to pass cb function.
     someHelperFunction();
-
-    callback();
-};
-
-CLI.prototype.help_foo = function(subcmd, opts, args, callback) {
-    // This is a programmer error: forgot to pass cb function.
-    // someHelperFunction();
 
     callback();
 };

@@ -20,7 +20,7 @@ function Sub(parent) {
 }
 util.inherits(Sub, Cmdln);
 
-Sub.prototype.emptyLine = function(cb) {
+Sub.prototype.emptyLine = function emptyLine(cb) {
     p(
         'top sub: top.opts.verbose=%s sub.opts.s=%s',
         this.top.opts.verbose,
@@ -29,7 +29,7 @@ Sub.prototype.emptyLine = function(cb) {
     cb();
 };
 
-Sub.prototype.do_bleep = function(subcmd, opts, args, cb) {
+Sub.prototype.do_bleep = function do_bleep(_subcmd, opts, args, cb) {
     p(
         'top sub bleep: top.opts.verbose=%s sub.opts.s=%s opts.t=%s args=%j',
         this.top.opts.verbose,
@@ -49,7 +49,7 @@ Sub.prototype.do_bleep.options = [
 ];
 Sub.prototype.do_bleep.help = 'sub bleep help\n' + '\n' + '{{options}}';
 
-Sub.prototype.do_bloop = function(subcmd, opts, args, cb) {
+Sub.prototype.do_bloop = function do_bloop(_subcmd, _opts, _args, cb) {
     p('top sub bloop');
     cb();
 };
@@ -65,13 +65,18 @@ function Top() {
 }
 util.inherits(Top, Cmdln);
 
-Top.prototype.do_blah = function(subcmd, opts, args, cb) {
+Top.prototype.do_blah = function do_blah(_subcmd, _opts, args, cb) {
     p('top blah: args=%j', args);
     cb();
 };
 Top.prototype.do_blah.help = 'blah help';
 
-Top.prototype.do_completion = function(subcmd, opts, args, cb) {
+Top.prototype.do_completion = function do_completion(
+    _subcmd,
+    _opts,
+    _args,
+    cb
+) {
     console.log(this.bashCompletion());
     cb();
 };
