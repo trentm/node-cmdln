@@ -5,7 +5,7 @@
     ],
     "extends": [
         "eslint:recommended",
-//        "plugin:joyent/style",
+        "plugin:joyent/style",
         "plugin:joyent/lint",
 //        "plugin:prettier/recommended"
     ],
