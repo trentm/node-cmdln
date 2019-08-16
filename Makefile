@@ -33,7 +33,7 @@ test: ensure-node-v6-or-greater-for-test-suite | $(TAP_EXEC)
 	    NODE_NDEBUG= $(TAP_EXEC) --timeout $(TEST_TIMEOUT_S) -j $(TEST_JOBS) -o ./test.tap $$testFiles
 
 .PHONY: testall
-testall: test6 test8 test10
+testall: test6 test8 test10 test12
 .PHONY: test6
 test6:
 	@echo "# Test node 6.x (with node `$(NODEOPT)/node-6/bin/node --version`)"
