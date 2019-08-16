@@ -23,21 +23,21 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.fini = function (subcmd, err, callback) {
+CLI.prototype.fini = function(subcmd, err, callback) {
     p('ran fini:', subcmd);
     callback();
 };
 
-CLI.prototype.do_hi = function (subcmd, opts, args, callback) {
+CLI.prototype.do_hi = function(subcmd, opts, args, callback) {
     // This is a programmer error: forgot to pass cb function.
     someHelperFunction();
 
     callback();
 };
 
-CLI.prototype.help_foo = function (subcmd, opts, args, callback) {
+CLI.prototype.help_foo = function(subcmd, opts, args, callback) {
     // This is a programmer error: forgot to pass cb function.
-    //someHelperFunction();
+    // someHelperFunction();
 
     callback();
 };

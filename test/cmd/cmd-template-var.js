@@ -15,14 +15,14 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.do_awesome = function (subcmd, opts, args, cb) {
-    console.log('Do awesome.')
+CLI.prototype.do_awesome = function(subcmd, opts, args, cb) {
+    console.log('Do awesome.');
     cb();
 };
 CLI.prototype.do_awesome.help = 'Usage: {{name}} {{cmd}} ...';
 
-CLI.prototype.do_lame = function (subcmd, opts, args, cb) {
-    console.log('Do lame.')
+CLI.prototype.do_lame = function(subcmd, opts, args, cb) {
+    console.log('Do lame.');
     cb();
 };
 CLI.prototype.do_lame.help = 'Usage: {{name}} {{cmd}} ...';

@@ -15,38 +15,33 @@ function HS() {
         desc: 'Trying out helpSubcmds',
         helpSubcmds: [
             'help',
-            { group: '' },
+            {group: ''},
             'in-empty-group',
-            { group: 'Most Excellent Commands' },
+            {group: 'Most Excellent Commands'},
             'awesome',
-            { group: 'Other Commands', unmatched: true }
+            {group: 'Other Commands', unmatched: true}
         ]
     });
 }
 util.inherits(HS, cmdln.Cmdln);
 
-HS.prototype.do_awesome = function (subcmd, opts, args, cb) {
-    console.log('Do awesome.')
+HS.prototype.do_awesome = function(subcmd, opts, args, cb) {
+    console.log('Do awesome.');
     cb();
 };
-HS.prototype.do_awesome.help = (
-    'Do awesome things.\n'
-    + 'blah blah\n'
-);
+HS.prototype.do_awesome.help = 'Do awesome things.\n' + 'blah blah\n';
 
-HS.prototype.do_in_empty_group = function (subcmd, opts, args, cb) {
-    console.log('Do in-empty-group.')
+HS.prototype.do_in_empty_group = function(subcmd, opts, args, cb) {
+    console.log('Do in-empty-group.');
     cb();
 };
 HS.prototype.do_in_empty_group.help = 'Do in-empty-group things.\n';
 
-HS.prototype.do_something_else = function (subcmd, opts, args, cb) {
-    console.log('Do something-else.')
+HS.prototype.do_something_else = function(subcmd, opts, args, cb) {
+    console.log('Do something-else.');
     cb();
 };
 HS.prototype.do_something_else.help = 'Do something-else things.\n';
-
-
 
 if (require.main === module) {
     cmdln.main(new HS());

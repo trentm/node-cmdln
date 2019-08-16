@@ -1,4 +1,3 @@
-
 /*
  * Basic node-cmdln tests.
  */
@@ -10,16 +9,14 @@ var test = require('tap').test;
 
 var cmdln = require('../lib/cmdln');
 
-
 // ---- globals and constants
 
 var DEBUG = false;
 if (DEBUG) {
     var debug = console.warn;
 } else {
-    var debug = function () {};
+    var debug = function() {};
 }
-
 
 // ---- internal support stuff
 
@@ -27,16 +24,15 @@ function objCopy(obj, target) {
     if (!target) {
         target = {};
     }
-    Object.keys(obj).forEach(function (k) {
+    Object.keys(obj).forEach(function(k) {
         target[k] = obj[k];
     });
     return target;
 }
 
-
 // ---- tests
 
-test('exports', function (t) {
+test('exports', function(t) {
     t.ok(cmdln.Cmdln, 'cmdln.Cmdln');
     t.ok(cmdln.CmdlnError, 'cmdln.CmdlnError');
     t.ok(cmdln.OptionError, 'cmdln.OptionError');
@@ -45,10 +41,10 @@ test('exports', function (t) {
     t.end();
 });
 
-test('<error>.code', function (t) {
-    var cause = new Error('boom')
-    t.equal((new cmdln.OptionError(cause)).code, 'Option');
-    t.equal((new cmdln.UnknownCommandError('foo')).code, 'UnknownCommand');
+test('<error>.code', function(t) {
+    var cause = new Error('boom');
+    t.equal(new cmdln.OptionError(cause).code, 'Option');
+    t.equal(new cmdln.UnknownCommandError('foo').code, 'UnknownCommand');
     t.end();
 });
 
@@ -57,37 +53,76 @@ var cases = [
     {
         cmd: 'conan.js',
         expect: {
-            stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /hear/],
+            stdout: [
+                /^Usage/m,
+                /^What is best/m,
+                /^Options/m,
+                /-h, --help/,
+                /^Commands/m,
+                /crush/,
+                /hear/
+            ],
             code: 1
         }
     },
     {
         cmd: 'conan.js -h',
         expect: {
-            stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /smash/, /hear/]
+            stdout: [
+                /^Usage/m,
+                /^What is best/m,
+                /^Options/m,
+                /-h, --help/,
+                /^Commands/m,
+                /crush/,
+                /smash/,
+                /hear/
+            ]
         }
     },
     {
         cmd: 'conan.js --help',
         expect: {
-            stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /smash/, /hear/]
+            stdout: [
+                /^Usage/m,
+                /^What is best/m,
+                /^Options/m,
+                /-h, --help/,
+                /^Commands/m,
+                /crush/,
+                /smash/,
+                /hear/
+            ]
         }
     },
     {
         cmd: 'conan.js help',
         expect: {
-            stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /smash/, /hear/]
+            stdout: [
+                /^Usage/m,
+                /^What is best/m,
+                /^Options/m,
+                /-h, --help/,
+                /^Commands/m,
+                /crush/,
+                /smash/,
+                /hear/
+            ]
         }
     },
     {
         cmd: 'conan.js ?',
         expect: {
-            stdout: [/^Usage/m, /^What is best/m, /^Options/m, /-h, --help/,
-                /^Commands/m, /crush/, /smash/, /hear/]
+            stdout: [
+                /^Usage/m,
+                /^What is best/m,
+                /^Options/m,
+                /-h, --help/,
+                /^Commands/m,
+                /crush/,
+                /smash/,
+                /hear/
+            ]
         }
     },
 
@@ -102,62 +137,77 @@ var cases = [
     // subcmd
     {
         cmd: 'conan.js crush',
-        expect: { stdout: /^No enemies/ }
+        expect: {stdout: /^No enemies/}
     },
     {
         cmd: 'conan.js crush Bob',
-        expect: { stdout: /^Smite Bob with a sword!/ }
+        expect: {stdout: /^Smite Bob with a sword!/}
     },
     {
         cmd: 'conan.js crush Bob -w',
         /* JSSTYLED */
-        expect: { err: /do not have enough args for "-w"/ }
+        expect: {err: /do not have enough args for "-w"/}
     },
     {
         cmd: 'conan.js crush Bob -w maul',
-        expect: { stdout: /^Smite Bob with a maul!/ }
+        expect: {stdout: /^Smite Bob with a maul!/}
     },
     {
         cmd: 'conan.js crush --weapon=spear Sally',
-        expect: { stdout: /^Smite Sally with a spear!/ }
+        expect: {stdout: /^Smite Sally with a spear!/}
     },
     {
         cmd: 'conan.js crush --weapon spear Sally',
-        expect: { stdout: /^Smite Sally with a spear!/ }
+        expect: {stdout: /^Smite Sally with a spear!/}
     },
 
     // alias
     {
         cmd: 'conan.js smash Bob',
-        expect: { stdout: /^Smite Bob with a sword!/ }
+        expect: {stdout: /^Smite Bob with a sword!/}
     },
 
     // hidden alias
     {
         cmd: 'conan.js pulverize Bob',
-        expect: { stdout: /^Smite Bob with a sword!/ }
+        expect: {stdout: /^Smite Bob with a sword!/}
     },
 
     // subcmd help
     {
         cmd: 'conan.js help crush',
         expect: {
-            stdout: [ /^Crush your enemies/, /^Usage/m, /conan crush/,
-                /-w WEAPON, --weapon=WEAPON/, /^Options:/m ]
+            stdout: [
+                /^Crush your enemies/,
+                /^Usage/m,
+                /conan crush/,
+                /-w WEAPON, --weapon=WEAPON/,
+                /^Options:/m
+            ]
         }
     },
     {
         cmd: 'conan.js crush -h',
         expect: {
-            stdout: [ /^Crush your enemies/, /^Usage/m, /conan crush/,
-                /-w WEAPON, --weapon=WEAPON/, /^Options:/m ]
+            stdout: [
+                /^Crush your enemies/,
+                /^Usage/m,
+                /conan crush/,
+                /-w WEAPON, --weapon=WEAPON/,
+                /^Options:/m
+            ]
         }
     },
     {
         cmd: 'conan.js crush --help',
         expect: {
-            stdout: [ /^Crush your enemies/, /^Usage/m, /conan crush/,
-                /-w WEAPON, --weapon=WEAPON/, /^Options:/m ]
+            stdout: [
+                /^Crush your enemies/,
+                /^Usage/m,
+                /conan crush/,
+                /-w WEAPON, --weapon=WEAPON/,
+                /^Options:/m
+            ]
         }
     },
 
@@ -251,7 +301,7 @@ var cases = [
         cmd: 'main-opts.js --verbose',
         env: {
             MAIN_OPTS_SHOW_NO_COMMAND_ERR: '1',
-            MAIN_OPTS_SHOW_CODE: '1',
+            MAIN_OPTS_SHOW_CODE: '1'
         },
         expect: {
             code: 1,
@@ -306,9 +356,7 @@ var cases = [
         },
         expect: {
             code: 1,
-            stderr: [
-                /bwcompat-main-v1: error \(NoCommand\): no command given/
-            ]
+            stderr: [/bwcompat-main-v1: error \(NoCommand\): no command given/]
         }
     },
     {
@@ -318,9 +366,7 @@ var cases = [
         },
         expect: {
             code: 1,
-            stderr: [
-                /bwcompat-main-v1: error: unknown option: "--asdf"/
-            ]
+            stderr: [/bwcompat-main-v1: error: unknown option: "--asdf"/]
         }
     },
 
@@ -344,44 +390,28 @@ var cases = [
         cmd: 'subsubcmd.js',
         expect: {
             code: 1,
-            stdout: [
-                /^\s+blah\s+blah help/m,
-                /^\s+sub\s+sub desc/m
-            ]
+            stdout: [/^\s+blah\s+blah help/m, /^\s+sub\s+sub desc/m]
         }
     },
     {
         cmd: 'subsubcmd.js help',
         expect: {
             code: 0,
-            stdout: [
-                /^\s+blah\s+blah help/m,
-                /^\s+sub\s+sub desc/m
-            ]
+            stdout: [/^\s+blah\s+blah help/m, /^\s+sub\s+sub desc/m]
         }
     },
     {
         cmd: 'subsubcmd.js help sub',
         expect: {
-            stdout: [
-                /^sub desc/,
-                /^\s+bleep\s+sub bleep help/m
-            ],
-            notStdout: [
-                /^\s+bloop/m
-            ]
+            stdout: [/^sub desc/, /^\s+bleep\s+sub bleep help/m],
+            notStdout: [/^\s+bloop/m]
         }
     },
     {
         cmd: 'subsubcmd.js sub help',
         expect: {
-            stdout: [
-                /^sub desc/,
-                /^\s+bleep\s+sub bleep help/m
-            ],
-            notStdout: [
-                /^\s+bloop/m
-            ]
+            stdout: [/^sub desc/, /^\s+bleep\s+sub bleep help/m],
+            notStdout: [/^\s+bloop/m]
         }
     },
     {
@@ -445,10 +475,10 @@ var cases = [
         cmd: 'help-subcmds.js help',
         expect: {
             stdout: [
-                /Commands:\n    help/,
-                /\n\n    in-empty-group/,
-                /\n\n  Most Excellent Commands:\n    awesome/,
-                /\n\n  Other Commands:\n    something-else/,
+                /Commands:\n {4}help/,
+                /\n\n {4}in-empty-group/,
+                /\n\n {2}Most Excellent Commands:\n {4}awesome/,
+                /\n\n {2}Other Commands:\n {4}something-else/
             ]
         }
     },
@@ -460,7 +490,7 @@ var cases = [
             code: 1,
             stdout: [
                 /^\s+awesome\s+Usage: cmd-template-var awesome .../m,
-                /^\s+lame\s+Usage: cmd-template-var lame .../m,
+                /^\s+lame\s+Usage: cmd-template-var lame .../m
             ]
         }
     },
@@ -470,7 +500,7 @@ var cases = [
             code: 0,
             stdout: [
                 /^\s+awesome\s+Usage: cmd-template-var awesome .../m,
-                /^\s+lame\s+Usage: cmd-template-var lame .../m,
+                /^\s+lame\s+Usage: cmd-template-var lame .../m
             ]
         }
     },
@@ -478,9 +508,7 @@ var cases = [
         cmd: 'cmd-template-var.js help awesome',
         expect: {
             code: 0,
-            stdout: [
-                /^Usage: cmd-template-var awesome .../m,
-            ]
+            stdout: [/^Usage: cmd-template-var awesome .../m]
         }
     },
 
@@ -489,10 +517,7 @@ var cases = [
         cmd: 'synopses-and-errhelp.js',
         expect: {
             code: 1,
-            stdout: [
-                /^Usage:/m,
-                /^    synopses-and-errhelp \[OPTIONS/m,
-            ]
+            stdout: [/^Usage:/m, /^ {4}synopses-and-errhelp \[OPTIONS/m]
         }
     },
     {
@@ -501,8 +526,8 @@ var cases = [
             code: 0,
             stdout: [
                 /^Usage:/m,
-                /^    synopses-and-errhelp abc \[OPTIONS\] arg1 arg2$/m,
-                /^    synopses-and-errhelp abc --list-foo$/m,
+                /^ {4}synopses-and-errhelp abc \[OPTIONS\] arg1 arg2$/m,
+                /^ {4}synopses-and-errhelp abc --list-foo$/m
             ]
         }
     },
@@ -514,7 +539,7 @@ var cases = [
                 /* BEGIN JSSTYLED */
                 /^synopses-and-errhelp abc: error: unknown option: "--bogus"$/m,
                 /^usage: synopses-and-errhelp abc \[ --help \| -h \] \[ --file=FILE \| -f FILE \]$/m,
-                /^    \[ --list-foo \] \.\.\.$/m
+                /^ {4}\[ --list-foo \] \.\.\.$/m
                 /* END JSSTYLED */
             ]
         }
@@ -527,8 +552,8 @@ var cases = [
                 /* BEGIN JSSTYLED */
                 /^synopses-and-errhelp abc: error: incorrect number of args$/m,
                 /^usage:/m,
-                /^    synopses-and-errhelp abc \[OPTIONS\] arg1 arg2$/m,
-                /^    synopses-and-errhelp abc --list-foo$/m,
+                /^ {4}synopses-and-errhelp abc \[OPTIONS\] arg1 arg2$/m,
+                /^ {4}synopses-and-errhelp abc --list-foo$/m
                 /* END JSSTYLED */
             ]
         }
@@ -542,7 +567,7 @@ var cases = [
                 /* END JSSTYLED */
                 /^synopses-and-errhelp: error: unknown command: "abd"$/m,
                 /^Did you mean this?/m,
-                /^    abc$/m,
+                /^ {4}abc$/m
             ]
         }
     },
@@ -571,47 +596,53 @@ var cases = [
                 //        at _toss (/Users/trentm/tm/node-cmdln/node_modules/assert-plus/assert.js:22:11)
                 //    ...
                 /^.*node_modules\/assert-plus\/assert.js:\d+$/m,
-                /^    throw new assert.AssertionError\({$/m,
-                /^    \^$/m,
+                /^ {4}throw new assert.AssertionError\({$/m,
+                /^ {4}\^$/m,
                 /^AssertionError.*: cb \(func\) is required$/m,
-                /^    at someHelperFunction \(.*\/programmer-error.js:15:12\).*$/m
+                /^ {4}at someHelperFunction \(.*\/programmer-error.js:15:12\).*$/m
             ]
         }
     }
 ];
 
-cases.forEach(function (c, i) {
+cases.forEach(function(c, i) {
     var expect = c.expect;
     var cmd = c.cmd;
     var env = c.env;
     var envStr = '';
     if (env) {
-        Object.keys(env).forEach(function (e) {
+        Object.keys(env).forEach(function(e) {
             envStr += format('%s=%s ', e, env[e]);
         });
     }
     var name = format('case %d: %s%s', i, envStr, c.cmd);
 
-    if (process.env.TEST_CASE_FILTER && name.indexOf(process.env.TEST_CASE_FILTER) === -1) {
-        debug('skip test "%s": does not match TEST_CASE_FILTER "%s"',
-            name, process.env.TEST_CASE_FILTER);
+    if (
+        process.env.TEST_CASE_FILTER &&
+        name.indexOf(process.env.TEST_CASE_FILTER) === -1
+    ) {
+        debug(
+            'skip test "%s": does not match TEST_CASE_FILTER "%s"',
+            name,
+            process.env.TEST_CASE_FILTER
+        );
         return;
     }
 
-    test(name, function (t) {
+    test(name, function(t) {
         debug('--');
         var opts = {
             cwd: path.resolve(__dirname, '..')
         };
         var realCmd = cmd
-                .replace(/^conan\.js/, 'node examples/conan.js')
-                .replace(/^([\w-]+)\.js/, 'node test/cmd/$1.js');
+            .replace(/^conan\.js/, 'node examples/conan.js')
+            .replace(/^([\w-]+)\.js/, 'node test/cmd/$1.js');
         debug('cmd:', realCmd);
         if (env) {
             debug('env: %j', env);
             opts.env = objCopy(process.env, objCopy(env));
         }
-        exec(realCmd, opts, function (err, stdout, stderr) {
+        exec(realCmd, opts, function(err, stdout, stderr) {
             debug('err:', err);
             debug('code:', err && err.code);
             debug('stdout: "%s"', stdout);
@@ -619,43 +650,52 @@ cases.forEach(function (c, i) {
             if (expect.err) {
                 t.ok(err, 'err');
                 if (expect.err instanceof RegExp) {
-                    t.match(err.message, expect.err,
-                        'err.message should match ' + expect.err);
+                    t.match(
+                        err.message,
+                        expect.err,
+                        'err.message should match ' + expect.err
+                    );
                 }
             }
             if (expect.code !== undefined) {
                 var code = err ? err.code : 0;
-                t.equal(code, expect.code, format(
-                    'exit code does not match %s: %s', expect.code, code));
+                t.equal(
+                    code,
+                    expect.code,
+                    format('exit code does not match %s: %s', expect.code, code)
+                );
             }
             if (!(expect.err || expect.code !== undefined)) {
                 t.ifError(err);
             }
             if (expect.stdout) {
-                var pats = (Array.isArray(expect.stdout)
-                    ? expect.stdout : [expect.stdout]);
-                pats.forEach(function (pat) {
-                    if (typeof(pat) === 'string') {
+                var pats = Array.isArray(expect.stdout)
+                    ? expect.stdout
+                    : [expect.stdout];
+                pats.forEach(function(pat) {
+                    if (typeof pat === 'string') {
                         pat = new RegExp(pat);
                     }
                     t.match(stdout, pat, 'stdout should match ' + pat);
                 });
             }
             if (expect.notStdout) {
-                var pats = (Array.isArray(expect.notStdout)
-                    ? expect.notStdout : [expect.notStdout]);
-                pats.forEach(function (pat) {
-                    if (typeof(pat) === 'string') {
+                var pats = Array.isArray(expect.notStdout)
+                    ? expect.notStdout
+                    : [expect.notStdout];
+                pats.forEach(function(pat) {
+                    if (typeof pat === 'string') {
                         pat = new RegExp(pat);
                     }
                     t.notMatch(stdout, pat, 'stdout should not match ' + pat);
                 });
             }
             if (expect.stderr) {
-                var pats = (Array.isArray(expect.stderr)
-                    ? expect.stderr : [expect.stderr]);
-                pats.forEach(function (pat) {
-                    if (typeof(pat) === 'string') {
+                var pats = Array.isArray(expect.stderr)
+                    ? expect.stderr
+                    : [expect.stderr];
+                pats.forEach(function(pat) {
+                    if (typeof pat === 'string') {
                         pat = new RegExp(pat);
                     }
                     t.match(stderr, pat, 'stderr should match ' + pat);

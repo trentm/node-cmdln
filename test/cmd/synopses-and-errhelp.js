@@ -15,7 +15,7 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.do_abc = function (subcmd, opts, args, cb) {
+CLI.prototype.do_abc = function(subcmd, opts, args, cb) {
     if (opts.help) {
         this.do_help('help', {}, [subcmd], cb);
         return;
@@ -23,7 +23,7 @@ CLI.prototype.do_abc = function (subcmd, opts, args, cb) {
         cb(new cmdln.UsageError('incorrect number of args'));
         return;
     }
-    console.log('abc: opts=%j, arg=%j', opts, args)
+    console.log('abc: opts=%j, arg=%j', opts, args);
     cb();
 };
 CLI.prototype.do_abc.synopses = [

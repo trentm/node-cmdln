@@ -14,17 +14,17 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.init = function (opts, args, callback) {
+CLI.prototype.init = function(opts, args, callback) {
     p('ran init');
     cmdln.Cmdln.prototype.init.apply(this, arguments);
 };
 
-CLI.prototype.fini = function (subcmd, err, callback) {
+CLI.prototype.fini = function(subcmd, err, callback) {
     p('ran fini:', subcmd);
     callback();
 };
 
-CLI.prototype.do_hi = function (subcmd, opts, args, callback) {
+CLI.prototype.do_hi = function(subcmd, opts, args, callback) {
     p('hi');
     callback();
 };

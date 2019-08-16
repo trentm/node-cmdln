@@ -15,7 +15,7 @@ function CLI() {
 }
 util.inherits(CLI, cmdln.Cmdln);
 
-CLI.prototype.init = function (opts, args, callback) {
+CLI.prototype.init = function(opts, args, callback) {
     if (opts.verbose) {
         this.showErrStack = true;
     }
@@ -23,12 +23,15 @@ CLI.prototype.init = function (opts, args, callback) {
 };
 
 if (require.main === module) {
-    cmdln.main(CLI,
-        (process.env.BWCOMPAT_MAIN_V1_ARGV
-            ? process.env.BWCOMPAT_MAIN_V1_ARGV.split(',') : undefined),
+    cmdln.main(
+        CLI,
+        process.env.BWCOMPAT_MAIN_V1_ARGV
+            ? process.env.BWCOMPAT_MAIN_V1_ARGV.split(',')
+            : undefined,
         {
-            showCode: (process.env.BWCOMPAT_MAIN_V1_SHOW_CODE
-                ? Boolean(process.env.BWCOMPAT_MAIN_V1_SHOW_CODE) : undefined)
+            showCode: process.env.BWCOMPAT_MAIN_V1_SHOW_CODE
+                ? Boolean(process.env.BWCOMPAT_MAIN_V1_SHOW_CODE)
+                : undefined
         }
     );
 }

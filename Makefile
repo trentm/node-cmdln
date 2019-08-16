@@ -4,7 +4,7 @@
 #
 
 ESLINT = ./node_modules/.bin/eslint
-JS_FILES := $(shell find lib -name '*.js')
+JS_FILES := $(shell find lib test -name '*.js')
 NODEOPT ?= $(HOME)/opt
 TAP_EXEC = ./node_modules/.bin/tap
 TEST_JOBS ?= 10
