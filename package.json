@@ -32,11 +32,11 @@
         "fuzzyset.js": "^0.0.1"
     },
     "devDependencies": {
-        "eslint": "4.13.1",
+        "eslint": "^4.19.1",
         "eslint-config-prettier": "^2.9.0",
         "eslint-plugin-joyent": "~2.0.0",
         "eslint-plugin-prettier": "^2.6.0",
-        "prettier": "^1.11.1",
+        "prettier": "1.18.2",
         "tap": "^12.7.0"
     }
 }
