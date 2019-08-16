@@ -2,6 +2,10 @@
 
 ## not yet released
 
+(nothing yet)
+
+## 5.0.0
+
 - [Backward incompatible change, issue #12] Cmdln's dispatch to `do_*`
   subcommand handler functions is no longer wrapped in a try/catch block, which
   means that exceptions from programmer errors will no longer be swallowed.
