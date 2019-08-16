@@ -30,7 +30,7 @@ Sub.prototype.emptyLine = function (cb) {
 };
 
 Sub.prototype.do_bleep = function (subcmd, opts, args, cb) {
-    p('top sub bleep: top.opts.verbose=%s sub.opts.s=%s opts.t=%s args=%s',
+    p('top sub bleep: top.opts.verbose=%s sub.opts.s=%s opts.t=%s args=%j',
       this.top.opts.verbose, this.opts.s, opts.t, args);
     cb();
 };
@@ -68,7 +68,7 @@ function Top() {
 util.inherits(Top, Cmdln);
 
 Top.prototype.do_blah = function (subcmd, opts, args, cb) {
-    p('top blah: args=%s', args);
+    p('top blah: args=%j', args);
     cb();
 };
 Top.prototype.do_blah.help = 'blah help';

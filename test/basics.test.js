@@ -405,13 +405,13 @@ var cases = [
     {
         cmd: 'subsubcmd.js blah',
         expect: {
-            stdout: /^top blah: args=\s+$/
+            stdout: /^top blah: args=\[\]\s+$/
         }
     },
     {
         cmd: 'subsubcmd.js blah one two',
         expect: {
-            stdout: /^top blah: args=one,two\s+$/
+            stdout: /^top blah: args=\["one","two"\]\s+$/
         }
     },
     {
@@ -436,7 +436,7 @@ var cases = [
     {
         cmd: 'subsubcmd.js -v sub -s bleep -t one two three',
         expect: {
-            stdout: /^top sub bleep: top.opts.verbose=true sub.opts.s=true opts.t=one args=two,three\s+$/
+            stdout: /^top sub bleep: top.opts.verbose=true sub.opts.s=true opts.t=one args=\["two","three"\]\s+$/
         }
     },
 
