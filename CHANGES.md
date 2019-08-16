@@ -2,8 +2,70 @@
 
 ## not yet released
 
+- [Backward incompatible change, issue #12] Cmdln's dispatch to `do_*`
+  subcommand handler functions is no longer wrapped in a try/catch block, which
+  means that exceptions from programmer errors will no longer be swallowed.
+  Before this change a programmer error could not be distinguished from a
+  command calling back with a runtime error.
+
+    Take this example:
+
+    ```javascript
+    var util = require('util');
+    var cmdln = require('.');
+
+    function CLI() {
+        cmdln.Cmdln.call(this, {name: 'boom'});
+    }
+    util.inherits(CLI, cmdln.Cmdln);
+
+    CLI.prototype.do_hi = function (subcmd, opts, args, cb) {
+        someMissingHelperFunction(); // OOPS
+        cb();
+    };
+
+    if (require.main === module) {
+        cmdln.main(new CLI());
+    }
+    ```
+
+    Before cmdln v5:
+
+    ```shell
+    $ node boom.js hi
+    boom: error: someMissingHelperFunction is not defined
+    $ echo $?
+    1
+    ```
+
+    And as of this change:
+
+    ```
+    $ node boom.js hi
+    /Users/trentm/tm/node-cmdln/boom.js:10
+        someMissingHelperFunction();
+        ^
+
+    ReferenceError: someMissingHelperFunction is not defined
+        at CLI.do_hi (/Users/trentm/tm/node-cmdln/boom.js:10:5)
+        at CLI.dispatch (/Users/trentm/tm/node-cmdln/lib/cmdln.js:1315:17)
+        at mainInit (/Users/trentm/tm/node-cmdln/lib/cmdln.js:727:14)
+        at CLI.init (/Users/trentm/tm/node-cmdln/lib/cmdln.js:965:5)
+        at CLI.cmdlnMain [as main] (/Users/trentm/tm/node-cmdln/lib/cmdln.js:702:10)
+        at Object.main (/Users/trentm/tm/node-cmdln/lib/cmdln.js:1493:9)
+        at Object.<anonymous> (/Users/trentm/tm/node-cmdln/boom.js:15:11)
+        at Module._compile (internal/modules/cjs/loader.js:778:30)
+        at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+        at Module.load (internal/modules/cjs/loader.js:653:32)
+    $ echo $?
+    1
+    ```
+
 - Switch testing to node-tap (requires node v6 to run test suite).
+
 - Drop "support" for node 0.8.
+
+- Switch checking/formatting to eslint/prettier.
 
 ## 4.4.0
 

@@ -553,6 +553,30 @@ var cases = [
         expect: {
             code: 0
         }
+    },
+
+    // Test not swallowing programmer errors in handlers.
+    {
+        cmd: 'programmer-error.js hi',
+        expect: {
+            code: 1,
+            stderr: [
+                // Expect a traceback:
+                //    /Users/trentm/tm/node-cmdln/node_modules/assert-plus/assert.js:22
+                //        throw new assert.AssertionError({
+                //        ^
+                //
+                //    AssertionError [ERR_ASSERTION]: cb (func) is required
+                //        at new AssertionError (internal/assert.js:269:11)
+                //        at _toss (/Users/trentm/tm/node-cmdln/node_modules/assert-plus/assert.js:22:11)
+                //    ...
+                /^.*node_modules\/assert-plus\/assert.js:\d+$/m,
+                /^    throw new assert.AssertionError\({$/m,
+                /^    \^$/m,
+                /^AssertionError.*: cb \(func\) is required$/m,
+                /^    at someHelperFunction \(.*\/programmer-error.js:15:12\).*$/m
+            ]
+        }
     }
 ];
 
@@ -568,9 +592,9 @@ cases.forEach(function (c, i) {
     }
     var name = format('case %d: %s%s', i, envStr, c.cmd);
 
-    if (process.env.TEST_FILTER && name.indexOf(process.env.TEST_FILTER) === -1) {
-        debug('skip test "%s": does not match TEST_FILTER "%s"',
-            name, process.env.TEST_FILTER);
+    if (process.env.TEST_CASE_FILTER && name.indexOf(process.env.TEST_CASE_FILTER) === -1) {
+        debug('skip test "%s": does not match TEST_CASE_FILTER "%s"',
+            name, process.env.TEST_CASE_FILTER);
         return;
     }
 
