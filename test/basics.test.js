@@ -603,6 +603,20 @@ var cases = [
                 /^ {4}at someHelperFunction \(.*\/programmer-error.js:14:12\).*$/m
             ]
         }
+    },
+
+    // Test 'strings' Cmdln config option.
+    {
+        cmd: 'help-header-style.js help',
+        expect: {
+            stdout: [/^USAGE$/m, /^OPTIONS$/m, /^COMMANDS$/m]
+        }
+    },
+    {
+        cmd: 'help-header-style.js help blah',
+        expect: {
+            stdout: [/^USAGE$/m, /^OPTIONS$/m]
+        }
     }
 ];
 

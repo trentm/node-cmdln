@@ -4,6 +4,28 @@
 
 (nothing yet)
 
+## 5.1.0
+
+- [issue #19] Add `strings` config option to `Cmdln` creation that allows
+  overriding the strings used in some generated output -- in particular the
+  help output headers. E.g., one can use:
+
+    ```javascript
+    function CLI() {
+        Cmdln.call(this, {
+            // ...
+            strings: {
+                helpHeaderUsage: 'USAGE',
+                helpHeaderOptions: 'OPTIONS',
+                helpHeaderCommands: 'COMMANDS'
+            }
+    ```
+
+    To have the CLI help output use "USAGE" rather than "Usage:", etc.
+
+    See https://github.com/trentm/node-cmdln/blob/master/test/cmd/help-header-style.js
+    for a complete example.
+
 ## 5.0.0
 
 - [Backward incompatible change, issue #12] Cmdln's dispatch to `do_*`
