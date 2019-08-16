@@ -2,9 +2,6 @@
 (think `git`, `svn`, `zfs`, `brew`, etc.). It is a sister of my earlier
 [Python lib for this](https://github.com/trentm/cmdln).
 
-Follow <a href="https://twitter.com/intent/user?screen_name=trentmick" target="_blank">@trentmick</a>
-for updates to node-cmdln.
-
 
 # Usage
 
