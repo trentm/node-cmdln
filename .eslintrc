@@ -1,13 +1,13 @@
 {
     "plugins": [
         "joyent",
-//        "prettier"
+        "prettier"
     ],
     "extends": [
         "eslint:recommended",
         "plugin:joyent/style",
         "plugin:joyent/lint",
-//        "plugin:prettier/recommended"
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 6,
