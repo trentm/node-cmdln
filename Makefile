@@ -1,9 +1,10 @@
 #
-# Copyright 2016 Trent Mick
-# Copyright 2016 Joyent, Inc.
+# Copyright 2019 Trent Mick
+# Copyright 2019 Joyent, Inc.
 #
 
-JSSTYLE_FILES := $(shell find lib -name "*.js")
+ESLINT = ./node_modules/.bin/eslint
+JS_FILES := $(shell find lib -name '*.js')
 NODEOPT ?= $(HOME)/opt
 TAP_EXEC = ./node_modules/.bin/tap
 TEST_JOBS ?= 10
@@ -11,12 +12,12 @@ TEST_TIMEOUT_S ?= 1200
 TEST_FILTER ?= .*
 
 
-all $(TAP_EXEC):
+all $(TAP_EXEC) $(ESLINT):
 	npm install
 
 .PHONY: distclean
 distclean:
-	rm -rf node_modules
+	rm -rf node_modules test.tap
 
 
 .PHONY: ensure-node-v6-or-greater-for-test-suite
@@ -54,24 +55,26 @@ test12:
 	@$(NODEOPT)/node-12/bin/node --version
 	@PATH="$(NODEOPT)/node-12/bin:$(PATH)" make test
 
-
-.PHONY: check-jsstyle
-check-jsstyle: $(JSSTYLE_FILES)
-	./tools/jsstyle -o indent=4,doxygen,unparenthesized-return=0,blank-after-start-comment=0,leading-right-paren-ok $(JSSTYLE_FILES)
-
 .PHONY: check
-check:: check-jsstyle versioncheck
+check:: check-version check-eslint
 	@echo "Check ok."
 
+.PHONY: check-eslint
+check-eslint: | $(ESLINT)
+	$(ESLINT) $(JS_FILES)
 
 # Ensure CHANGES.md and package.json have the same version.
-.PHONY: versioncheck
-versioncheck:
+.PHONY: check-version
+check-version:
 	@echo version is: $(shell cat package.json | json version)
 	[[ `cat package.json | json version` == `grep '^## ' CHANGES.md | head -2 | tail -1 | awk '{print $$2}'` ]]
 
+.PHONY: fmt
+fmt: | $(ESLINT)
+	$(ESLINT) --fix $(JS_FILES)
+
 .PHONY: cutarelease
-cutarelease: versioncheck
+cutarelease: check
 	[[ -z `git status --short` ]]  # If this fails, the working dir is dirty.
 	@which json 2>/dev/null 1>/dev/null && \
 	    ver=$(shell json -f package.json version) && \

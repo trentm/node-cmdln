@@ -2,7 +2,8 @@
 
 ## not yet released
 
-(nothing yet)
+- Switch testing to node-tap (requires node v6 to run test suite).
+- Drop "support" for node 0.8.
 
 ## 4.4.0
 

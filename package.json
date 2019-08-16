@@ -23,10 +23,17 @@
         "assert-plus": "^1.0.0",
         "extsprintf": "^1.2.0",
         "verror": "^1.6.0",
-        "dashdash": "^1.14.1",
+        "dashdash": "^1.14.1"
+    },
+    "optionalDependencies": {
         "fuzzyset.js": "^0.0.1"
     },
     "devDependencies": {
+        "eslint": "4.13.1",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-joyent": "~2.0.0",
+        "eslint-plugin-prettier": "^2.6.0",
+        "prettier": "^1.11.1",
         "tap": "^12.7.0"
     }
 }
