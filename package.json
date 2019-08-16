@@ -19,6 +19,9 @@
         "completion"
     ],
     "license": "MIT",
+    "files": [
+        "lib"
+    ],
     "dependencies": {
         "assert-plus": "^1.0.0",
         "extsprintf": "^1.2.0",
