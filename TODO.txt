@@ -39,6 +39,7 @@ Some thoughts. See `npm completion` for some inspiration.
 - doc `init` usage (--version example). Doc `this.opts` for global parsed
   opts.
 - doc `return callback(false)` ?
+- doc showErrInfo
 - update README for current usage
 - make do_help optional (see helpCmd in ctor)
 - `debug: true` option to  ctor for the debug logging

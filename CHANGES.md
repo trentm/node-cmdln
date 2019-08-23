@@ -2,7 +2,35 @@
 
 ## not yet released
 
-(nothing yet)
+- [Backward incompatible change] Add `showErrInfo` option to `cmdln.main()`.
+  "Error info" is additional info on an error instance in the callback from
+  the run command, per <https://github.com/joyent/node-verror#verrorinfoerr>.
+
+  For example, you could have code like this in a subcommand handler:
+
+        var err = new VError(
+            {
+                name: 'NotEnoughSpaceError'
+                info: {'x-request-id': response.headers['x-request-id']
+            },
+            'not enough free space for 5120 MB'
+        );
+        err.code = 'NotEnoughSpace';
+        cb(err);
+
+  Here that `info: ...` object is the "error info". That would look like
+  the following on the command-line:
+
+        mbucket cp: error (NotEnoughSpace): not enough free space for 5120 MB
+            x-request-id: 5f41a396-e800-4d64-8b01-11e65fe74aa5
+
+  This is a backward incompatible change if you already have subcommands that
+  can return a `VError` instance with info. To get the old behaviour, use:
+
+        cmdln.main(cli, {showErrInfo: false});
+
+  Note that before this change, error info was *already* being shown in the
+  output when `showErrStack` was true.
 
 ## 5.1.0
 
