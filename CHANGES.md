@@ -2,6 +2,10 @@
 
 ## not yet released
 
+(nothing yet)
+
+## 6.0.0
+
 - [Backward incompatible change] Drop support for `cmdln.main()` accepting a
   non-Error instance from a `<Cmdln>.main()`. Before this change a subcommand
   calling back with something like `callback(true)` would "work". Now it
