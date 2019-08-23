@@ -2,6 +2,16 @@
 
 ## not yet released
 
+- [Backward incompatible change] Drop support for `cmdln.main()` accepting a
+  non-Error instance from a `<Cmdln>.main()`. Before this change a subcommand
+  calling back with something like `callback(true)` would "work". Now it
+  will throw:
+
+        AssertionError [ERR_ASSERTION]: err from main is not an Error: true
+
+- [Backward incompatible change] Drop the undocumented `cli.suppressShowErr`
+  option.
+
 - [Backward incompatible change] Add `showErrInfo` option to `cmdln.main()`.
   "Error info" is additional info on an error instance in the callback from
   the run command, per <https://github.com/joyent/node-verror#verrorinfoerr>.
