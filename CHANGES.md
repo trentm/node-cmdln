@@ -4,6 +4,52 @@
 
 (nothing yet)
 
+## 7.0.0
+
+- [Backward incompatible change] This changes the formatting of "error info" --
+  a feature introduced in v6.0.0. There are two changes:
+
+    1. Error info is now always rendered via `JSON.stringify`. Previously
+       that was only done if `showErrStack`. This deals with an issue where
+       the other rendering would result in, e.g.,  `res: [object Object]`
+       if the info value was an Object.
+    2. Indentation has been increased.
+
+    Before v7.0.0 example:
+
+    ```
+    $ mytool list
+    mytool list: error: 3 errors:
+        error gathering rebalancer-agent info on storage inst 70521b69-4c31-469b-b120-00d7e2300517
+        error gathering rebalancer-agent info on storage inst 887bb8e7-5117-4173-a9a3-6499ab10651c
+        error gathering rebalancer-agent info on storage inst 20e480c9-fb66-4a64-8d92-c2f89e496da1
+        res: [object Object]
+    ```
+
+    With v7.0.0 example:
+
+    ```
+    $ mytool list
+    mytool list: error: 3 errors:
+        error gathering rebalancer-agent info on storage inst 20e480c9-fb66-4a64-8d92-c2f89e496da1
+        error gathering rebalancer-agent info on storage inst 887bb8e7-5117-4173-a9a3-6499ab10651c
+        error gathering rebalancer-agent info on storage inst 70521b69-4c31-469b-b120-00d7e2300517
+        error info:
+            {
+                "res": {
+                    "uuid": "cc9ad6da-e05e-11e2-8e23-002590c3f078",
+                    "hostname": "S12612523509075",
+                    "zonename": "20e480c9-fb66-4a64-8d92-c2f89e496da1",
+                    "service": "storage",
+                    "result": {
+                        "exit_status": 2,
+                        "stdout": "edfeb9c7-1c22-41ca-ab17-b8c3bfdf8037\nnot-frobbed\n",
+                        "stderr": "bash: line 33: syntax error: unexpected end of file\n"
+                    }
+                }
+            }
+    ```
+
 ## 6.0.0
 
 - [Backward incompatible change] Drop support for `cmdln.main()` accepting a
