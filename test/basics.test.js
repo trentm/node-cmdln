@@ -34,7 +34,7 @@ function objCopy(obj, target) {
 
 // ---- tests
 
-tap.jobs = os.cpus().length // run tests in this file in parallel
+tap.jobs = os.cpus().length; // run tests in this file in parallel
 
 tap.test('exports', function _(t) {
     t.ok(cmdln.Cmdln, 'cmdln.Cmdln');

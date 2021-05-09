@@ -1,12 +1,11 @@
+// Eslint examples:
+//   npx eslint --print-config lib/cmdln.js
 {
     "plugins": [
-        "joyent",
         "prettier"
     ],
     "extends": [
         "eslint:recommended",
-        "plugin:joyent/style",
-        "plugin:joyent/lint",
         "plugin:prettier/recommended"
     ],
     "parserOptions": {
@@ -21,5 +20,6 @@
     "rules": {
         "curly": ["error", "all"],
         "func-names": ["error", "always"]
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
     }
 }
