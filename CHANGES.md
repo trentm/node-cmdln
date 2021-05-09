@@ -2,7 +2,11 @@
 
 ## not yet released
 
-(nothing yet)
+- [Backward incompatible change] Drop support for versions before
+  node v12. Before this compat was back to v0.10.0. I don't intend to
+  break anything, but I will only test with v12 and later. This bump
+  allows me to update (dev)Dependencies to not have security PRs for
+  them so often.
 
 ## 7.0.0
 

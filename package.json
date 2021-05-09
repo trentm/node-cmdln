@@ -8,9 +8,9 @@
         "type": "git",
         "url": "git://github.com/trentm/node-cmdln.git"
     },
-    "engines": [
-        "node >=0.10.0"
-    ],
+    "engines": {
+        "node": ">=12.x"
+    },
     "keywords": [
         "cmdln",
         "cli",
@@ -24,9 +24,9 @@
     ],
     "dependencies": {
         "assert-plus": "^1.0.0",
+        "dashdash": "^2.0.0",
         "extsprintf": "^1.2.0",
-        "verror": "^1.6.0",
-        "dashdash": "^1.14.1"
+        "verror": "^1.6.0"
     },
     "optionalDependencies": {
         "fuzzyset.js": "^0.0.1"
@@ -36,7 +36,7 @@
         "eslint-config-prettier": "^2.9.0",
         "eslint-plugin-joyent": "~2.0.0",
         "eslint-plugin-prettier": "^2.6.0",
-        "prettier": "1.18.2",
-        "tap": "^12.7.0"
+        "prettier": "^2.2.1",
+        "tap": "^15.0.9"
     }
 }

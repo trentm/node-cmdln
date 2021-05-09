@@ -2,10 +2,11 @@
  * Basic node-cmdln tests.
  */
 
-var path = require('path');
-var format = require('util').format;
 var exec = require('child_process').exec;
-var test = require('tap').test;
+var format = require('util').format;
+var path = require('path');
+var os = require('os');
+var tap = require('tap');
 
 var cmdln = require('../lib/cmdln');
 
@@ -33,7 +34,9 @@ function objCopy(obj, target) {
 
 // ---- tests
 
-test('exports', function _(t) {
+tap.jobs = os.cpus().length // run tests in this file in parallel
+
+tap.test('exports', function _(t) {
     t.ok(cmdln.Cmdln, 'cmdln.Cmdln');
     t.ok(cmdln.CmdlnError, 'cmdln.CmdlnError');
     t.ok(cmdln.OptionError, 'cmdln.OptionError');
@@ -42,7 +45,7 @@ test('exports', function _(t) {
     t.end();
 });
 
-test('<error>.code', function _(t) {
+tap.test('<error>.code', function _(t) {
     var cause = new Error('boom');
     t.equal(new cmdln.OptionError(cause).code, 'Option');
     t.equal(new cmdln.UnknownCommandError('foo').code, 'UnknownCommand');
@@ -644,7 +647,7 @@ cases.forEach(function onCase(c, i) {
         return;
     }
 
-    test(name, function _(t) {
+    tap.test(name, function _(t) {
         debug('--');
         var opts = {
             cwd: path.resolve(__dirname, '..')
@@ -684,7 +687,7 @@ cases.forEach(function onCase(c, i) {
                 );
             }
             if (!(expect.err || expect.code !== undefined)) {
-                t.ifError(err);
+                t.error(err);
             }
             if (expect.stdout) {
                 pats = Array.isArray(expect.stdout)
@@ -719,7 +722,7 @@ cases.forEach(function onCase(c, i) {
                     t.match(stderr, pat, 'stderr should match ' + pat);
                 });
             }
-            t.done();
+            t.end();
         });
     });
 });
